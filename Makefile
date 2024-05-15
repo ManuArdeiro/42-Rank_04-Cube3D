@@ -6,14 +6,14 @@
 #    By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/05/06 19:36:45 by Ardeiro          ###   ########.fr        #
+#    Updated: 2024/05/15 17:42:27 by Ardeiro          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	cube
 
 vpath 			%.h	include : mlx
-vpath 			%.c	mlx : src : src/parsing : tests
+vpath 			%.c	mlx : src : src/parsing : src/utils : tests
 vpath 			%.o	obj
 
 USER			=	$(shell whoami)
@@ -28,11 +28,13 @@ CC 				= 	gcc
 CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
 
 #-------------------------- C Files -------------------------------------
-PARSING			=	parse.c
+PARSING			=	map_errors.c map.c parse.c textures.c
 
-SRC 			=	$(PARSING) $(TESTS) main.c
+UTILS			=	free_mem.c
 
 TESTS			=	print_map.c
+
+SRC 			=	$(PARSING) $(UTILS) $(TESTS) main.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

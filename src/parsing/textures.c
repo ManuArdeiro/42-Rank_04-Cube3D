@@ -6,106 +6,124 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 00:53:42 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/07 02:06:59 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/15 18:39:15 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_north_texture(char *str)
+#include "cube.h"
+
+static void ft_count_words(t_data *data, char *str)
 {
-    int     i;
-    int     j;
-    char    *path;
+    int i;
+    int words;
 
     i = 0;
-    j = 0;
-    path = malloc(ft_strlen(str));
-    while (ft_is_space(str[i]))
-        i++;
-    if (!(str[i] == 'N' && str[i + 1] == 'O' && ft_is_space(str[i + 2])))
-        return (NULL);
-    while (ft_is_space(str[i]))
-        i++;
+    words = 0;
     while (str[i])
     {
-        path[j] = str[i];
-        i++;
-        j++;
+        if (!ft_is_space(str[i]))
+        {
+            words++;
+            while (str[i] && !ft_is_space(str[i]))
+                i++;
+        }
+        else
+            i++;
     }
-    path[j] = '\0';
-    return (path);
+    if (words != 2)
+    {
+        perror("Error: Texture line with many elements!!\n");
+        ft_free_mem(&data);
+        exit(EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
 }
 
-char    *ft_south_texture(char *str)
+static void ft_check_path(t_data *data, char *path, char cardinal)
 {
-    int     i;
-    int     j;
-    char    *path;
-
-    i = 0;
-    j = 0;
-    path = malloc(ft_strlen(str));
-    while (ft_is_space(str[i]))
-        i++;
-    if (!(str[i] == 'S' && str[i + 1] == 'O' && ft_is_space(str[i + 2])))
-        return (NULL);
-    while (ft_is_space(str[i]))
-        i++;
-    while (str[i])
+    if (open(path, R_OK) < 0)
     {
-        path[j] = str[i];
-        i++;
-        j++;
+        if (cardinal == 'N')
+            perror("Error: North texture can't be opened!!\n");
+        else if (cardinal == 'S')
+            perror("Error: South texture can't be opened!!\n");
+        else if (cardinal == 'E')
+            perror("Error: East texture can't be opened!!\n");
+        else if (cardinal == 'W')
+            perror("Error: West texture can't be opened!!\n");
+        else if (cardinal == 'F')
+            perror("Error: Floor texture can't be opened!!\n");
+        else if (cardinal == 'C')
+            perror("Error: Ceiling texture can't be opened!!\n");
+        ft_free_mem(&data);
+        exit(EXIT_FAILURE);
     }
-    path[j] = '\0';
-    return (path);
+    close(open(path, R_OK));
+    return (EXIT_SUCCESS);
 }
 
-char    *ft_east_texture(char *str)
+int ft_check_texture(t_data *data, char *line, char *cardinal)
 {
-    int     i;
-    int     j;
-    char    *path;
+    int i;
+    int j;
+    char *path;
 
     i = 0;
     j = 0;
-    path = malloc(ft_strlen(str));
-    while (ft_is_space(str[i]))
+    while (line[i] && ft_is_space(line[i]))
         i++;
-    if (!(str[i] == 'E' && str[i + 1] == 'A' && ft_is_space(str[i + 2])))
-        return (NULL);
-    while (ft_is_space(str[i]))
-        i++;
-    while (str[i])
+    if (line[i] == cardinal[0] && line[i + 1] == cardinal[1])
     {
-        path[j] = str[i];
-        i++;
-        j++;
+        ft_count_words(data, line);
+        i = i + 2;
+        while (line[i] && ft_is_space(line[i]))
+            i++;
+        path = malloc(sizeof(char) * (ft_strlen(line) - i + 1));
+        while (line[i] && !ft_is_space(line[i]))
+        {
+            path[j] = line[i];
+            i++;
+            j++;
+        }
+        data->north_path = path;
+        ft_check_path(data, path, cardinal[0]);
+        return (EXIT_SUCCESS);
     }
-    path[j] = '\0';
-    return (path);
+    return (EXIT_FAILURE);
 }
 
-char    *ft_west_texture(char *str)
+int ft_check_floor(t_data *data, char *line)
 {
-    int     i;
-    int     j;
-    char    *path;
+    int i;
+    int j;
+    char *path;
 
     i = 0;
     j = 0;
-    path = malloc(ft_strlen(str));
-    while (ft_is_space(str[i]))
+    while (line[i] && ft_is_space(line[i]))
         i++;
-    if (!(str[i] == 'W' && str[i + 1] == 'E' && ft_is_space(str[i + 2])))
-        return (NULL);
-    while (ft_is_space(str[i]))
-        i++;
-    while (str[i])
+    if (line[i] == 'F' && line[i + 1] == ' ')
     {
-        path[j] = str[i];
-        i++;
-        j++;
+        ft_floor_rgb(data, line);
+        return (EXIT_SUCCESS);
     }
-    path[j] = '\0';
-    return (path);
+    return (EXIT_FAILURE);
+}
+
+int ft_check_ceiling(t_data *data, char *line)
+{
+    int i;
+    int j;
+    char *path;
+
+    i = 0;
+    j = 0;
+    while (line[i] && ft_is_space(line[i]))
+        i++;
+    if (line[i] == 'C' && line[i + 1] == ' ')
+    {
+        ft_ceiling_rgb(data, line);
+        return (EXIT_SUCCESS);
+    }
+    return (EXIT_FAILURE);
 }

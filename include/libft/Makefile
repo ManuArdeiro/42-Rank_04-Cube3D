@@ -6,7 +6,7 @@
 #    By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/26 17:03:15 by jolopez-          #+#    #+#              #
-#    Updated: 2024/05/07 01:01:29 by Ardeiro          ###   ########.fr        #
+#    Updated: 2024/05/09 02:38:16 by Ardeiro          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS			= ft_isalnum.c ft_isprint.c ft_memcmp.c ft_putchar_fd.c \
 				  ft_split.c ft_strstr.c ft_lstadd_front_bonus.c \
 				  ft_lstclear_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonus.c \
 				  ft_lstlast_bonus.c ft_lstmap_bonus.c ft_lstnew_bonus.c \
-				  ft_lstsize_bonus.c ft_is_space ft_lstadd_back_bonus.c \
+				  ft_lstsize_bonus.c ft_is_space.c ft_lstadd_back_bonus.c \
 				  ft_strarraylen.c ft_clear_strarray.c ft_strchr_pos.c \
 				  ft_lstclear_nodes.c ft_lstinsert.c ft_lstcopy.c \
 				  ft_chrcount.c ft_strequal.c ft_strstrip.c ft_cutstr.c \

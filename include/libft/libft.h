@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/05/07 01:02:38 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/09 02:36:43 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void			ft_strarr_add(
 					char ***strarray, const char *newstring, int pos);
 int				ft_strcontains(
 					const char *fullstring, const char *string_tofind);
-int				ft_is_space(char c);
+int				ft_is_space(const char c);
 #endif
