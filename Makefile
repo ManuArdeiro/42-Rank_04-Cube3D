@@ -6,7 +6,7 @@
 #    By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/05/15 17:42:27 by Ardeiro          ###   ########.fr        #
+#    Updated: 2024/05/17 13:54:38 by Ardeiro          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ CC 				= 	gcc
 CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
 
 #-------------------------- C Files -------------------------------------
-PARSING			=	map_errors.c map.c parse.c textures.c
+PARSING			=	checks.c colors.c map.c parse.c textures.c utils.c
 
 UTILS			=	free_mem.c
 
-TESTS			=	print_map.c
+TESTS			=	printing.c
 
 SRC 			=	$(PARSING) $(UTILS) $(TESTS) main.c
 

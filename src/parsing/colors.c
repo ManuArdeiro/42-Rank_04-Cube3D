@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:03:45 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/15 18:09:44 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/17 02:18:42 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char *ft_read_number(const char *str, int *i)
     char    *number;
 
     j = 0;
+    number = "";
     while (ft_is_space(str[*i]))
         (*i)++;
     while (j < 2)
@@ -36,7 +37,7 @@ static void ft_check_comma(t_data *data, const char *str, int *i)
         (*i)++;
     if (str[*i] != ',')
     {
-        ft_free_mem(&data);
+        ft_free_mem(data);
         perror("Error: RGB format not valid!!\n");
         exit(EXIT_FAILURE);
     }
@@ -50,14 +51,14 @@ static void ft_check_end(t_data *data, const char *str, int *i)
         (*i)++;
     if (str[*i] != '\0')
     {
-        ft_free_mem(&data);
+        ft_free_mem(data);
         perror("Error: RGB format not valid!!\n");
         exit(EXIT_FAILURE);
     }
     return ;
 }
 
-void    *ft_floor_rgb(t_data *data, const char *str)
+int    ft_floor_rgb(t_data *data, const char *str)
 {
     int     i;
     int     j;
@@ -86,7 +87,7 @@ void    *ft_floor_rgb(t_data *data, const char *str)
     return (EXIT_SUCCESS);
 }
 
-void    *ft_ceiling_rgb(t_data *data, const char *str)
+int    ft_ceiling_rgb(t_data *data, const char *str)
 {
     int     i;
     int     j;
@@ -98,7 +99,7 @@ void    *ft_ceiling_rgb(t_data *data, const char *str)
     while (ft_is_space(str[i]))
         i++;
     if (!(str[i] == 'C' && ft_is_space(str[i + 1])))
-        return (NULL);
+        return (EXIT_FAILURE);
     while (j < 3)
     {
         number = ft_read_number(str, &i);

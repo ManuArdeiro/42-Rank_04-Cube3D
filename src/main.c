@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/16 00:32:46 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/17 00:30:42 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void ft_init_data(t_data *data)
 {
-    data->map_width = 0;
-    data->map_height = 0;
+    data->map_width = -1;
+    data->map_height = -1;
     data->floor = NULL;
     data->ceiling = NULL;
     data->north_path = NULL;

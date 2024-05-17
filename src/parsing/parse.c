@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/15 18:36:36 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/16 02:43:18 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ static int  ft_read_file(t_data *data, char *map_path)
     return (EXIT_SUCCESS);
 }
 
-static int  ft_check_empty_line(const char *line)
-{
-    int     i;
-
-    i = 0;
-    while (ft_is_space(line[i]))
-        i++;
-    if (line[i] == '\0')
-        return (EXIT_SUCCESS);
-    return (EXIT_FAILURE);
-}
-
 static int  ft_check_lines(t_data *data, const char *line, t_list **temp)
 {
     if (ft_check_texture(data, line, "NO") == EXIT_FAILURE &&
@@ -75,6 +63,18 @@ static int  ft_check_lines(t_data *data, const char *line, t_list **temp)
     return (EXIT_SUCCESS);
 }
 
+int  ft_empty_line(const char *line)
+{
+    int     i;
+
+    i = 0;
+    while (ft_is_space(line[i]))
+        i++;
+    if (line[i] == '\0')
+        return (EXIT_SUCCESS);
+    return (EXIT_FAILURE);
+}
+
 int ft_parsing(t_data *data, char *map_path)
 {
     t_list  *temp;
@@ -87,7 +87,7 @@ int ft_parsing(t_data *data, char *map_path)
     temp = data->file;
     while (temp)
     {
-        if (ft_check_empty_line((char *)temp->content))
+        if (ft_empty_line((char *)temp->content))
             temp = temp->next;
         else if (ft_check_lines(data, (char *)temp->content, &temp))
             return (EXIT_FAILURE);

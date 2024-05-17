@@ -6,13 +6,13 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 00:53:42 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/15 18:39:15 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/17 13:51:25 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void ft_count_words(t_data *data, char *str)
+static int  ft_count_words(t_data *data, const char *str)
 {
     int i;
     int words;
@@ -33,13 +33,13 @@ static void ft_count_words(t_data *data, char *str)
     if (words != 2)
     {
         perror("Error: Texture line with many elements!!\n");
-        ft_free_mem(&data);
+        ft_free_mem(data);
         exit(EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
 }
 
-static void ft_check_path(t_data *data, char *path, char cardinal)
+static int  ft_check_path(t_data *data, char *path, char cardinal)
 {
     if (open(path, R_OK) < 0)
     {
@@ -55,14 +55,14 @@ static void ft_check_path(t_data *data, char *path, char cardinal)
             perror("Error: Floor texture can't be opened!!\n");
         else if (cardinal == 'C')
             perror("Error: Ceiling texture can't be opened!!\n");
-        ft_free_mem(&data);
+        ft_free_mem(data);
         exit(EXIT_FAILURE);
     }
     close(open(path, R_OK));
     return (EXIT_SUCCESS);
 }
 
-int ft_check_texture(t_data *data, char *line, char *cardinal)
+int ft_check_texture(t_data *data, const char *line, char *cardinal)
 {
     int i;
     int j;
@@ -92,37 +92,43 @@ int ft_check_texture(t_data *data, char *line, char *cardinal)
     return (EXIT_FAILURE);
 }
 
-int ft_check_floor(t_data *data, char *line)
+int ft_check_floor(t_data *data, const char *line)
 {
     int i;
-    int j;
-    char *path;
 
     i = 0;
-    j = 0;
     while (line[i] && ft_is_space(line[i]))
         i++;
     if (line[i] == 'F' && line[i + 1] == ' ')
     {
-        ft_floor_rgb(data, line);
+        if (ft_floor_rgb(data, line))
+        {
+            perror("Error: Invalid RGB values!!\n");
+            ft_free_mem(data);
+            exit(EXIT_FAILURE);
+        
+        }
         return (EXIT_SUCCESS);
     }
     return (EXIT_FAILURE);
 }
 
-int ft_check_ceiling(t_data *data, char *line)
+int ft_check_ceiling(t_data *data, const char *line)
 {
     int i;
-    int j;
-    char *path;
 
     i = 0;
-    j = 0;
     while (line[i] && ft_is_space(line[i]))
         i++;
     if (line[i] == 'C' && line[i + 1] == ' ')
     {
-        ft_ceiling_rgb(data, line);
+        if (ft_ceiling_rgb(data, line))
+        {
+            perror("Error: Invalid RGB values!!\n");
+            ft_free_mem(data);
+            exit(EXIT_FAILURE);
+        
+        }
         return (EXIT_SUCCESS);
     }
     return (EXIT_FAILURE);

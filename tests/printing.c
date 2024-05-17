@@ -34,6 +34,8 @@ void    ft_print_info(t_data *data)
     
     i = 0;
     j = 0;
+    printf("Map width: %d\n", data->map_width);
+    printf("Map height: %d\n", data->map_height);
     printf("Floor: %d, %d, %d\n", data->floor[0], data->floor[1], data->floor[2]);
     printf("Ceiling: %d, %d, %d\n", data->ceiling[0], data->ceiling[1], data->ceiling[2]);
     printf("North path: %s\n", data->north_path);
