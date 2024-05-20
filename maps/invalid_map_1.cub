@@ -1,10 +1,10 @@
-NO	./assets/tile.png
+NO	../assets/tile.png
 
-SO	 ./assets/tile.png
+SO	../assets/tile.png
 
-WE	  ./assets/tile1.png
+WE	../assets/tile1.png
 
-EA	 ./assets/tile.png
+EA	../assets/tile.png
 
 F 255,100,0
 

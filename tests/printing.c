@@ -34,14 +34,15 @@ void    ft_print_info(t_data *data)
     
     i = 0;
     j = 0;
-    printf("Map width: %d\n", data->map_width);
+    printf("\nMap width: %d\n", data->map_width);
     printf("Map height: %d\n", data->map_height);
-    printf("Floor: %d, %d, %d\n", data->floor[0], data->floor[1], data->floor[2]);
+    printf("\nFloor: %d, %d, %d\n", data->floor[0], data->floor[1], data->floor[2]);
     printf("Ceiling: %d, %d, %d\n", data->ceiling[0], data->ceiling[1], data->ceiling[2]);
-    printf("North path: %s\n", data->north_path);
+    printf("\nNorth path: %s\n", data->north_path);
     printf("South path: %s\n", data->south_path);
     printf("East path: %s\n", data->east_path);
     printf("West path: %s\n", data->west_path);
+    printf("\nMap:\n");
     while (data->map[i][0])
     {
         while (data->map[i][j])

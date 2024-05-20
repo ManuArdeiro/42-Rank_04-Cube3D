@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/17 00:30:42 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/19 19:33:13 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void ft_init_data(t_data *data)
 {
+    int i;
+
+    i = 0;
     data->map_width = -1;
     data->map_height = -1;
     data->floor = NULL;
@@ -22,7 +25,17 @@ static void ft_init_data(t_data *data)
     data->south_path = NULL;
     data->east_path = NULL;
     data->west_path = NULL;
-    data->map = NULL;
+    data->map = (char **)malloc(sizeof(char *) * 100);
+    if (!data->map)
+        ft_exit(data, "Error: Malloc failed!!\n");
+    while (i < 100)
+    {
+        data->map[i] = malloc(sizeof(char) * 100);
+        if (!data->map[i])
+            ft_exit(data, "Error: Malloc failed!!\n");
+        data->map[i][0] = '\0';
+        i++;
+    }
     return ;
 }
 

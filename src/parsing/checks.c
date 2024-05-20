@@ -6,36 +6,26 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:22:54 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/17 02:25:22 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/20 23:59:41 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void ft_invalid_chars(t_data *data, char *line)
+static void ft_invalid_chars(t_data *data, char *line, int *count)
 {
     int i;
-    int count;
 
     i = 0;
-    count = 0;
     while (line[i])
     {
         if (line[i] != '1' && !ft_is_space(line[i]) && line[i] != 'N'
-            && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
-        {
-            perror("Error: Invalid chars in map!!\n");
-            ft_free_mem(data);
-            exit(EXIT_FAILURE);
-        }
+            && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != '0')
+            ft_exit(data, "Error: Invalid character in map!!\n");
         if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-            count++;
-        if (count > 1)
-        {
-            perror("Error: More than one player!!\n");
-            ft_free_mem(data);
-            exit(EXIT_FAILURE);
-        }
+            (*count)++;
+        if (*count > 1)
+            ft_exit(data, "Error: More than one player!!\n");
         i++;
     }
     return ;
@@ -68,7 +58,7 @@ int ft_check_map_dup(t_data *data, const char *line)
     i = 0;
     while (line[i] && ft_is_space(line[i]))
         i++;
-    if (line[i] == '1' && data->map != NULL)
+    if (line[i] == '1' && ft_strlen(data->map[0]) > 0)
     {
         perror("Error: Map is defined more than once!!\n");
         return (EXIT_FAILURE);
@@ -78,17 +68,19 @@ int ft_check_map_dup(t_data *data, const char *line)
 
 void    ft_check_invalid_chars(t_data *data, t_list **temp)
 {
+    int     count;
     char    *line;
     t_list  *aux;
 
+    count = 0;
     aux = *temp;
     line = (char*)aux->content;
-    ft_invalid_chars(data, line);
+    ft_invalid_chars(data, line, &count);
     while (aux->next)
     {
         aux = aux->next;
         line = (char*)aux->content;
-        ft_invalid_chars(data, line);
+        ft_invalid_chars(data, line, &count);
     }
     return ;
 }

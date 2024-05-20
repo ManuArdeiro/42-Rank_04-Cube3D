@@ -4,19 +4,19 @@
 
 
 
-NO	./assets/BrickMoss.png
+NO	../assets/BrickMoss.png
 
 
 
-SO	 ./assets/Tile.png
+SO	 ../assets/Tile.png
 
 
 
-WE	  ./assets/Copper.png
+WE	  ../assets/Copper.png
 
 
 
-EA	 ./assets/WoodDark.png
+EA	 ../assets/WoodDark.png
 
 
 

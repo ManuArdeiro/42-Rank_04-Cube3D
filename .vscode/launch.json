@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cube",
-            "args": ["${workspaceFolder}/maps/small_map.cub"],
+            "args": ["${workspaceFolder}/maps/complex_map.cub"],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],

@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/16 02:43:18 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/05/20 21:13:02 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,17 @@ static int  ft_read_file(t_data *data, char *map_path)
 
 static int  ft_check_lines(t_data *data, const char *line, t_list **temp)
 {
-    if (ft_check_texture(data, line, "NO") == EXIT_FAILURE &&
+    if (ft_check_textures_dup(data, line) == EXIT_FAILURE)
+    {
+        perror("Error: Some texture is defined more than once!!\n");
+        return (EXIT_FAILURE);
+    }
+    else if (ft_check_map_dup(data, line) == EXIT_FAILURE)
+    {
+        perror("Error: More than one map in file!!\n");
+        return (EXIT_FAILURE);
+    }
+    else if (ft_check_texture(data, line, "NO") == EXIT_FAILURE &&
         ft_check_texture(data, line, "SO") == EXIT_FAILURE &&
         ft_check_texture(data, line, "EA") == EXIT_FAILURE &&
         ft_check_texture(data, line, "WE") == EXIT_FAILURE &&
@@ -48,16 +58,6 @@ static int  ft_check_lines(t_data *data, const char *line, t_list **temp)
         ft_check_if_map(data,temp) == EXIT_FAILURE)
     {
         perror("Error: Invalid line!!\n");
-        return (EXIT_FAILURE);
-    }
-    if (ft_check_textures_dup(data, line) == EXIT_FAILURE)
-    {
-        perror("Error: Some texture is defined more than once!!\n");
-        return (EXIT_FAILURE);
-    }
-    if (ft_check_map_dup(data, line) == EXIT_FAILURE)
-    {
-        perror("Error: More than one map in file!!\n");
         return (EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
@@ -70,13 +70,14 @@ int  ft_empty_line(const char *line)
     i = 0;
     while (ft_is_space(line[i]))
         i++;
-    if (line[i] == '\0')
-        return (EXIT_SUCCESS);
-    return (EXIT_FAILURE);
+    if (line[i] == '\0' || line[i] == '\n')
+        return (EXIT_FAILURE);
+    return (EXIT_SUCCESS);
 }
 
 int ft_parsing(t_data *data, char *map_path)
 {
+    char    *line;
     t_list  *temp;
 
     if (ft_read_file(data, map_path))
@@ -85,14 +86,20 @@ int ft_parsing(t_data *data, char *map_path)
         return (EXIT_FAILURE);
     }
     temp = data->file;
-    while (temp)
+    line = (char *)temp->content;
+    while (temp->next)
     {
-        if (ft_empty_line((char *)temp->content))
+        if (ft_empty_line((line)))
             temp = temp->next;
-        else if (ft_check_lines(data, (char *)temp->content, &temp))
+        else if (ft_check_lines(data, line, &temp))
             return (EXIT_FAILURE);
         else
             temp = temp->next;
+        if (temp)
+            line = (char *)temp->content;
+        else
+            break ;
     }
+    ft_print_info(data);
     return (EXIT_SUCCESS);
 }
