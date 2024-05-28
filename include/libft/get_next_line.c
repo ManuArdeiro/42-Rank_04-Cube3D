@@ -57,7 +57,7 @@ static size_t	ft_find_len(const char *s, size_t *new_l)
 static char	*ft_read_get(char *str, int fd)
 {
 	char	*buff;
-	size_t	len;
+	int		len;
 
 	len = 1;
 	buff = ft_calloc_get(sizeof(char), BUFFER_SIZE + 1);

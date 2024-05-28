@@ -13,10 +13,9 @@
 NAME 			=	cube
 
 vpath 			%.h	include : mlx
-vpath 			%.c	mlx : src : src/parsing : src/utils : tests
+vpath 			%.c	mlx : src : src/game : src/parsing : src/utils : tests
 vpath 			%.o	obj
 
-USER			=	$(shell whoami)
 INCLUDE 		=	-Iinclude/
 INC_LIB 		=	-Iinclude/libft
 SANITIZER		=	-g3 -fsanitize=address -g
@@ -25,16 +24,21 @@ LIBFTDIR		= 	include/libft
 OBJ_DIR			=	obj
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER) \
+					-I/usr/include -Imlx_linux -Lmlx_linux -lmlx_Linux \
+					-L/usr/lib -Imlx_linux -lXext -lX11 -lm -l \
+					-O3
 
 #-------------------------- C Files -------------------------------------
+GAME			=	game.c
+
 PARSING			=	checks.c colors.c map.c parse.c textures.c utils.c
 
 UTILS			=	free_mem.c
 
 TESTS			=	printing.c
 
-SRC 			=	$(PARSING) $(UTILS) $(TESTS) main.c
+SRC 			=	$(GAME) $(PARSING) $(UTILS) $(TESTS) main.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -46,9 +50,8 @@ all: $(NAME)
 
 $(NAME): 	$(LIBFT) $(OBJS)
 			@echo "$(YELLOW) ...Creating Cube3D... $(WHITE)\n"
-			$(CC) $(CFLAGS) $(OBJS) $(INC_READLINE)\
-			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
-			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+			@echo "\n$(LIGHT_GRAY)---------- Cube3D Ready ------------\n"
 
 .SILENT:
 $(LIBFT):

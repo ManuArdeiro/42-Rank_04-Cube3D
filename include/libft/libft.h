@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdint.h>
 # include "get_next_line.h"
 
 typedef enum e_location

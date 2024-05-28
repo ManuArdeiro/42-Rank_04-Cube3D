@@ -45,7 +45,7 @@ CC				= gcc
 
 RM				= rm -rf
 
-CFLAGS			= -Wall -Wextra -Werror -I libft.h -g
+CFLAGS			= -Wall -Wextra -Werror -I -g
 
 NAME			= libft.a
 
