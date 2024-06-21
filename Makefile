@@ -3,17 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/05/17 13:54:38 by Ardeiro          ###   ########.fr        #
+#    Updated: 2024/06/20 22:32:28 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	cube
 
-vpath 			%.h	include : mlx
-vpath 			%.c	mlx : src : src/game : src/parsing : src/utils : tests
+BONUS			=	0
+
+vpath 			%.h	include : mlx_linux
+vpath 			%.c	mlx_linux : src : src/game : src/parsing : src/utils : tests
 vpath 			%.o	obj
 
 INCLUDE 		=	-Iinclude/
@@ -24,17 +26,16 @@ LIBFTDIR		= 	include/libft
 OBJ_DIR			=	obj
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER) \
-					-I/usr/include -Imlx_linux -Lmlx_linux -lmlx_Linux \
-					-L/usr/lib -Imlx_linux -lXext -lX11 -lm -l \
-					-O3
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
 
 #-------------------------- C Files -------------------------------------
-GAME			=	game.c
+BONUS			=	render_bonus.c
 
 PARSING			=	checks.c colors.c map.c parse.c textures.c utils.c
 
-UTILS			=	free_mem.c
+RENDER			=	textures.c
+
+UTILS			=	free_mem.c inits.c mlx.c print.c 
 
 TESTS			=	printing.c
 
@@ -44,13 +45,14 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
-	$(COMPILE.c) $< -o $@
+	$(COMPILE.c) -DBONUS=$(BONUS) -I/usr/include -Imlx_linux -O3 $< -o $@
 
 all: $(NAME)
 
 $(NAME): 	$(LIBFT) $(OBJS)
 			@echo "$(YELLOW) ...Creating Cube3D... $(WHITE)\n"
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+			$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJS) $(LIBFT) -Lmlx_linux
+			 -lmlx_Linux -L/usr/lib  -lXext -lX11 -lm -lz -o $(NAME)
 			@echo "\n$(LIGHT_GRAY)---------- Cube3D Ready ------------\n"
 
 .SILENT:
@@ -58,6 +60,9 @@ $(LIBFT):
 			echo "$(LIGHT_RED) ...Creating libft files... $(WHITE)\n"
 			$(MAKE) -C $(LIBFTDIR)
 			@echo "$(GREEN) ...libft created... $(WHITE)\n"
+
+bonus:
+		make all BONUS=1
 	
 clean:
 		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"

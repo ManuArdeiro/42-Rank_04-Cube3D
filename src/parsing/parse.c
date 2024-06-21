@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/20 21:13:02 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:52:20 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ int ft_parsing(t_data *data, char *map_path)
 		else
 			break ;
 	}
-	ft_print_info(data);
+	//ft_print_info(data);
 	return (EXIT_SUCCESS);
 }

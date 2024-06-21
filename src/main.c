@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/05/19 19:33:13 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2024/06/20 22:49:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	ft_init_data(t_data *data)
+void	ft_start_game(t_data *data)
 {
-	int	i;
+	ft_mlx_start(data);
 
-	i = 0;
-	data->map_width = -1;
-	data->map_height = -1;
-	data->floor = NULL;
-	data->ceiling = NULL;
-	data->north_path = NULL;
-	data->south_path = NULL;
-	data->east_path = NULL;
-	data->west_path = NULL;
-	data->map = (char **)malloc(sizeof(char *) * 100);
-	if (!data->map)
-		ft_exit(data, "Error: Malloc failed!!\n");
-	while (i < 100)
-	{
-		data->map[i] = malloc(sizeof(char) * 100);
-		if (!data->map[i])
-			ft_exit(data, "Error: Malloc failed!!\n");
-		data->map[i][0] = '\0';
-		i++;
-	}
-	return ;
+
+
+	
+	game->mlx = mlx_init();
+	if (!aux->mlx)
+		ft_exit(data, "Error in mlx_init");
+	if (mlx_get_screen_size(aux->mlx, &aux->win_size_x, &aux->win_size_y))
+		ft_exit(data, "Error in mlx_get_screen_size");
+	aux->mlx_window = mlx_new_window(aux->mlx, aux->win_size_x, \
+			aux->win_size_y, "Cub3d");
+	if (!aux->mlx_window)
+		ft_exit(data, "Error in mlx_window");
+	mlx_hook(aux->mlx_window, 17, 1L << 17, closewin, data);
+	mlx_key_hook(aux->mlx_window, key_select, data);
+	mlx_loop(aux->mlx);
+}
+
+void	ft_init(t_data *data)
+{
+	ft_init_data(data);
+	
 }
 
 static int	ft_check_args(const int argc, const char **argv)
@@ -74,12 +74,16 @@ int	main(int argc, char **argv)
 
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
-		return (perror("error in malloc"), free(data), EXIT_FAILURE);
-	ft_init_data(data);
+	{
+		perror("Error: error allocating memory!!\n");
+		return ( free(data), EXIT_FAILURE);
+	}
+	ft_init(data);
 	if (ft_check_args(argc, (const char **)argv))
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
 	if (ft_parsing(data, argv[1]))
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
+	ft_print_menu();
 	ft_start_game(data);
 	return (ft_free_mem(data), free(data), EXIT_SUCCESS);
 }
