@@ -6,37 +6,23 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/20 22:49:14 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:01:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	ft_start_game(t_data *data)
+static void	ft_game(t_data *data)
 {
+	ft_print_menu();
 	ft_mlx_start(data);
-
-
-
-	
-	game->mlx = mlx_init();
-	if (!aux->mlx)
-		ft_exit(data, "Error in mlx_init");
-	if (mlx_get_screen_size(aux->mlx, &aux->win_size_x, &aux->win_size_y))
-		ft_exit(data, "Error in mlx_get_screen_size");
-	aux->mlx_window = mlx_new_window(aux->mlx, aux->win_size_x, \
-			aux->win_size_y, "Cub3d");
-	if (!aux->mlx_window)
-		ft_exit(data, "Error in mlx_window");
-	mlx_hook(aux->mlx_window, 17, 1L << 17, closewin, data);
-	mlx_key_hook(aux->mlx_window, key_select, data);
-	mlx_loop(aux->mlx);
-}
-
-void	ft_init(t_data *data)
-{
-	ft_init_data(data);
-	
+	ft_initial_player_dir(data);
+	ft_texture_start(data);
+	ft_render_img(data);
+	ft_user_input(data);
+	mlx_loop_hook(data->mlx, ft_render_loop, data);
+	mlx_loop(data->mlx);
+	return ;
 }
 
 static int	ft_check_args(const int argc, const char **argv)
@@ -78,12 +64,12 @@ int	main(int argc, char **argv)
 		perror("Error: error allocating memory!!\n");
 		return ( free(data), EXIT_FAILURE);
 	}
-	ft_init(data);
+	ft_data_init(data);
 	if (ft_check_args(argc, (const char **)argv))
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
 	if (ft_parsing(data, argv[1]))
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
 	ft_print_menu();
-	ft_start_game(data);
+	ft_game(data);
 	return (ft_free_mem(data), free(data), EXIT_SUCCESS);
 }

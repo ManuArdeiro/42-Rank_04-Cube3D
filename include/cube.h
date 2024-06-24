@@ -6,15 +6,15 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/20 22:49:10 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:04:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef  CUBE_H
 # define  CUBE_H
 
-# ifndef BONUS
-#  define BONUS 1
+# ifndef BONUS_FLAG
+#  define BONUS_FLAG 1
 # endif
 
 //	INCLUDES:
@@ -28,22 +28,48 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <X11/Xlib.h>
+# include <X11/keysym.h>
+
+//	KEYS:
+////////////////////////////////////////////////////////////////////////////////
+
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+# define KEY_FORWARD 	126
+# define KEY_BACKWARD	125
+
+//	STRUCTS:EVENTS
+////////////////////////////////////////////////////////////////////////////////
+
+
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_MOUSE_PRESS	4
+# define X_EVENT_MOUSE_RELEASE	5
+# define X_EVENT_MOUSE_MOVE		6
+# define X_EVENT_EXIT			17
 
 //	CONSTANTS:
 /////////////////////////////////////////////////////////////////////////////////
 
-# define PI 3.14159265359
-# define WINDOW_WIDTH 960
-# define WINDOW_HEIGHT 720
-# define MOVE_SPEED 0.025
-# define ROT_SPEED 0.025
+# define PI 			3.14159265359
+# define WINDOW_WIDTH 	960
+# define WINDOW_HEIGHT 	720
+# define TEXTURE_SIZE 	64
+# define MOVE_SPEED 	0.025
+# define ROT_SPEED 		0.025
+# define MOUSE_STEP		15	
 //	Minimap:
-# define MINIMAP_PXL_SIZE 128
-# define MINIMAP_DISTANCE 5
-# define MINIMAP_PLAYER_COLOR 0x0000FF
-# define MINIMAP_WALL_COLOR 0x990000
-# define MINIMAP_FLOOR_COLOR 0xdddddd
-# define MINIMAP_SPACE_COLOR 0x000000
+# define MINIMAP_PXL_SIZE 		128
+# define MINIMAP_DISTANCE 		5
+# define MINIMAP_PLAYER_COLOR 	0x0000FF
+# define MINIMAP_WALL_COLOR		0x990000
+# define MINIMAP_FLOOR_COLOR 	0xdddddd
+# define MINIMAP_SPACE_COLOR 	0x000000
 
 //	ENUMS:
 /////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +77,9 @@
 enum e_texture_index
 {
 	NORTH = 0,
-	EAST = 90,
-	SOUTH = 180,
-	WEST = 270
+	EAST = 1,
+	SOUTH = 2,
+	WEST = 3
 };
 
 //	STRUCTS:
@@ -106,22 +132,23 @@ typedef struct	s_img
 
 typedef struct	s_texture
 {
+	int				x;
+	int				y;
 	int				size;
 	int				index;
 	double			step;
 	double			pos;
-	int				x;
-	int				y;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 	int				**texture_pixels;
-	int				**textures;
+	int				**texture;
 }				t_texture;
 
 typedef struct	s_minimap
 {
 	int		size;
 	int		tile_size;
+	int		distance;
 	int		offset_x;
 	int		offset_y;
 	char	**map;
@@ -158,20 +185,54 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 	t_texture	texture;
-	t_img		minimap;
-	t_map		map;
+	t_img		minimap_img;
+	t_map		map_data;
 }				t_data;
 
 //  File src/main.c
 int			main(int argc, char **argv);
 
+//	File src/bonus/minimap_image_bonus.c
+void		ft_render_minimap_img(t_data *data, t_minimap *minimap);
+
+//	File src/bonus/mlx_start__bonus.c
+void		ft_mlx_mouse(t_data *data);
+
 //	File src/bonus/render_bonus.c
 void		ft_render_minimap(t_data *data);
+
+//  File src/mlx/loop_function.c
+int			ft_render_loop(t_data *data);
+
+//  File src/mlx/mlx_start.c
+void		ft_mlx_img(t_data *data, t_img *image, int width, int height);
+void		ft_texture_img(t_data *data, t_img *image, char *path);
+void		ft_mlx_start(t_data *data);
+
+//  File src/moves/input_handler.c
+void		ft_user_input(t_data *data);
+
+//  File src/moves/player_dir.c
+void		ft_initial_player_dir(t_data *data);
+
+//  File src/moves/player_move.c
+int			ft_player_move(t_data *data);
+
+//  File src/moves/player_pos.c
+int			ft_move_validation(t_data *data, double new_x, double new_y);
+
+//  File src/moves/player_rotate.c
+int			ft_player_rotate(t_data **data);
 
 //  File src/parsing/checks.c
 int			ft_check_textures_dup(t_data *data, const char *line);
 int			ft_check_map_dup(t_data *data, const char *line);
 void		ft_check_invalid_chars(t_data *data, t_list **temp);
+
+//  File src/parsing/colors_aux.c
+char			*ft_read_number(const char *str, int *i);
+void			ft_check_comma(t_data *data, const char *str, int *i);
+void			ft_check_end(t_data *data, const char *str, int *i);
 
 //  File src/parsing/colors.c
 int			ft_floor_rgb(t_data *data, const char *str);
@@ -183,6 +244,9 @@ int			ft_check_if_map(t_data *data, t_list **temp);
 //  File src/parsing/parse.c
 int			ft_empty_line(const char *line);
 int			ft_parsing(t_data *data, char *map_path);
+
+//  File src/parsing/rgb_to_hex.c
+unsigned long	ft_rgb_to_hex(int *rgb);
 
 //  File src/parsing/textures.c
 int			ft_check_texture(t_data *data, const char *line, char *cardinal);
@@ -196,25 +260,44 @@ int			ft_vertical_last(t_data *data, int i);
 int			ft_horizontal_left_last(const char *line, int i);
 int			ft_horizontal_right_last(const char *line, int i);
 
-//  File tests/print_file.c
-void		ft_print_file(t_list *file);
-void		ft_print_info(t_data *data);
+//  File src/render/raycasting.c
+int			ft_raycasting(t_player *player, t_data *data);
+
+//	File src/render/render.c
+void		ft_render_img(t_data *data);
+
+//	File src/render/texture.c
+void		ft_texture_pixels_update(t_data *data, t_texture *tex, t_ray *ray,
+				int x);
 
 //  File src/utils/free_mem.c
+void		ft_free_matrix(void **tab);
 void		ft_free_mem(t_data *data);
 void		ft_exit(t_data *data, char *error);
+int			ft_close(t_data *data);
 
-//  File src/utils/inits.c
-void		ft_init_data(t_data *data);
-void		ft_init_img(t_img *img);
-
-//  File src/utils/mlx.c
-void		ft_img(t_data *data, t_img *image, int width, int height);
-void		ft_texture(t_data *data, t_img *image, char *path);
-void		ft_mlx_start(t_data *data);
-
-//  File src/utils/print.c
+//  File src/utils/menu.c
 void		ft_print_menu(void);
+
+//  File src/utils/struct_data.c
+void		ft_texture_img(t_data *data, t_img *image, char *path);
+void		ft_data_init(t_data *data);
+
+//  File src/utils/struct_img.c
+void		ft_image_pixel(t_img *image, int x, int y, int color);
+void		ft_img_init(t_img *img);
+
+//  File src/utils/struct_ray.c
+void		ft_ray_init(t_ray *ray);
+
+//  File src/utils/struct_texture.c
+void		ft_texture_pixels_init(t_data *data);
+void		ft_texture_init(t_data *data);
+void		ft_texture_start(t_data *data);
+
+//  File tests/print_info.c
+void		ft_print_file(t_list *file);
+void		ft_print_info(t_data *data);
 
 //	COLORS:
 ////////////////////////////////////////////////////////////////////////////////
@@ -235,15 +318,6 @@ void		ft_print_menu(void);
 # define CYAN	"\e[36m"
 # define WHITE	"\e[37m"
 
-# define BRIGHT_BLACK	"\e[90m"
-# define BRIGHT_RED		"\e[91m"
-# define BRIGHT_GREEN	"\e[92m"
-# define BRIGHT_YELLOW	"\e[93m"
-# define BRIGHT_BLUE	"\e[94m"
-# define BRIGHT_PURPLE	"\e[95m"
-# define BRIGHT_CYAN	"\e[96m"
-# define BRIGHT_WHITE	"\e[97m"
-
 # define BG_BLACK	"\e[40m"
 # define BG_RED		"\e[41m"
 # define BG_GREEN	"\e[42m"
@@ -253,13 +327,28 @@ void		ft_print_menu(void);
 # define BG_CYAN	"\e[46m"
 # define BG_WHITE	"\e[47m"
 
-# define BG_BRIGHT_BLACK	"\e[100m"
-# define BG_BRIGHT_RED		"\e[101m"
-# define BG_BRIGHT_GREEN	"\e[102m"
-# define BG_BRIGHT_YELLOW	"\e[103m"
-# define BG_BRIGHT_BLUE		"\e[104m"
-# define BG_BRIGHT_PURPLE	"\e[105m"
-# define BG_BRIGHT_CYAN		"\e[106m"
-# define BG_BRIGHT_WHITE	"\e[107m"
+	# define ERR_FILE_NOT_CUB "Not a .cub file"
+	# define ERR_FILE_NOT_XPM "Not an .xpm file"
+	# define ERR_FILE_IS_DIR "Is a directory"
+	# define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
+	# define ERR_COLOR_FLOOR "Invalid floor RGB color"
+	# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
+	# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
+	# define ERR_INV_LETTER "Invalid character in map"
+	# define ERR_NUM_PLAYER "Map has more than one player"
+	# define ERR_TEX_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
+	# define ERR_TEX_MISSING "Missing texture(s)"
+	# define ERR_TEX_INVALID "Invalid texture(s)"
+	# define ERR_COLOR_MISSING "Missing color(s)"
+	# define ERR_MAP_MISSING "Missing map"
+	# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
+	# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
+	# define ERR_MAP_LAST "Map is not the last element in file"
+	# define ERR_PLAYER_POS "Invalid player position"
+	# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
+	# define ERR_MALLOC "Could not allocate memory"
+	# define ERR_MLX_START "Could not start mlx"
+	# define ERR_MLX_WIN "Could not create mlx window"
+	# define ERR_MLX_IMG "Could not create mlx image"
 
 #endif

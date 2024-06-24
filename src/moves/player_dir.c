@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player_dir.c                                  :+:      :+:    :+:   */
+/*   player_dir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 01:52:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/21 01:54:05 by jolopez-         ###   ########.fr       */
+/*   Created: 2024/06/22 20:58:46 by jolopez-          #+#    #+#             */
+/*   Updated: 2024/06/24 17:58:59 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	ft_vertical(t_player *player)
+static void	ft_north_south_axis(t_player *player)
 {
 	if (player->dir == 'S')
 	{
@@ -28,11 +28,10 @@ static void	ft_vertical(t_player *player)
 		player->plane_x = 0.66;
 		player->plane_y = 0;
 	}
-	else
-		return ;
+	return ;
 }
 
-static void	ft_horizontal(t_player *player)
+static void	ft_east_west_axis(t_player *player)
 {
 	if (player->dir == 'W')
 	{
@@ -48,12 +47,12 @@ static void	ft_horizontal(t_player *player)
 		player->plane_x = 0;
 		player->plane_y = 0.66;
 	}
-	else
-		return ;
+	return ;
 }
 
-void	ft_init_player_dir(t_data *data)
+void	ft_initial_player_dir(t_data *data)
 {
-	ft_vertical(&data->player);
-	ft_horizontal(&data->player);
+	ft_north_south_axis(&data->player);
+	ft_east_west_axis(&data->player);
+	return ;
 }
