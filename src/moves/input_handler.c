@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:58:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 21:46:23 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 01:11:54 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,12 @@ static int	ft_mouse_motion(int x, int y, t_data *data)
 
 void	ft_user_input(t_data *data)
 {
-	mlx_hook(data->window, X_EVENT_EXIT, 0, ft_close, data);
-	mlx_hook(data->window, X_EVENT_KEY_RELEASE, 0, ft_key_press, data);
-	mlx_hook(data->window, X_EVENT_KEY_RELEASE, 0, ft_key_release, data);
+	mlx_hook(data->window, DestroyNotify, NoEventMask, ft_close, data);
+	mlx_hook(data->window, KeyPress, KeyPressMask, ft_key_press, data);
+	mlx_hook(data->window, KeyRelease, KeyReleaseMask, ft_key_release, data);
 	if (BONUS_FLAG)
 		mlx_hook(data->window, MotionNotify, PointerMotionMask, ft_mouse_motion,
 			data);
+	mlx_loop_hook(data->mlx, ft_render_loop, data);
 	return ;
 }

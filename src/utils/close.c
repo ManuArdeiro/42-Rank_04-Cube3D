@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 03:06:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:18:01 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 01:01:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_exit(t_data *data, char *error)
 
 int	ft_close(t_data *data)
 {
-	printf(WHITE "\nGame closed!! Come to play again soon :)\n");
+	printf(WHITE "\nGame closed!! Come to play again soon :)\n\n");
 	if (data->minimap_img.img && data->mlx)
 		mlx_destroy_image(data->mlx, data->minimap_img.img);
 	if (data->window && data->mlx)

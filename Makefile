@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/06/25 16:35:16 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/06/26 01:30:14 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ CC              =   gcc
 CFLAGS          =   -Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
 
 #-------------------------- C Files -------------------------------------
-BONUS_SRC       =   minimap_image_bonus.c mlx_start_bonus.c \
+BONUS       	=   minimap_image_bonus.c mlx_start_bonus.c \
 					render_minimap_bonus.c
 
 MLX             =   loop_function.c mlx_start.c
@@ -49,7 +49,7 @@ UTILS           =   close.c free_mem.c  menu.c struct_data.c struct_img.c \
 TESTS           =   print_info.c
 
 SRC             =   $(MLX) $(MOVES) $(PARSING) $(RENDER) $(UTILS) $(TESTS) main.c
-SRC_BONUS       =   $(SRC) $(BONUS_SRC)
+SRC_BONUS       =   $(SRC) $(BONUS)
 
 OBJS            =   $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJS_BONUS      =   $(SRC_BONUS:%.c=$(OBJ_DIR)/%.o)
@@ -60,17 +60,16 @@ $(OBJ_DIR)/%.o : %.c
 
 all: 		$(NAME)
 
-$(NAME):	$(LIBFT) $(OBJS) $(OBJS_BONUS)
+$(NAME):	$(LIBFT)  $(OBJS)
 			@echo "\n$(YELLOW) ...Creating Cube3D... $(WHITE)"
 			$(CC) $(CFLAGS) -DBONUS_FLAG=$(BONUS_FLAG) $(OBJS) $(LIBFT) -Lmlx_linux \
 			-lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
-			@echo "\n$(LIGHT_GRAY)--- Cube3D Ready ---\n"
+			@echo "\n\n$(LIGHT_GRAY)--- Cube3D Ready ---\n"
 
-bonus:		BONUS_FLAG=1
-bonus: 
-			make all
+bonus:		$(OBJS_BONUS)
+			make all BONUS_FLAG=1
 
-.SILENT:
+
 $(LIBFT):
 			echo "$(LIGHT_RED) ...Creating libft files... $(WHITE)\n"
 			$(MAKE) -C $(LIBFTDIR)
