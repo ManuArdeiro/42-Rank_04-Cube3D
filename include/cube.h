@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/25 17:09:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:34:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,6 @@ typedef struct	s_map
 	int			line_count;
 	char		*path;
 	char		**file;
-	int			height;
-	int			width;
 	int			index_end_of_map;
 }				t_map;
 

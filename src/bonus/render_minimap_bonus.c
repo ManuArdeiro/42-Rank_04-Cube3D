@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:01:40 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 23:22:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:35:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static char	*ft_add_line(t_data *data, t_minimap *mm, int y)
 	if (!line)
 		return (NULL);
 	x = 0;
-	while (x < mm->size && x < data->map_data.width)
+	while (x < mm->size && x < data->map_width)
 	{
-		if (!ft_valid_coordinate(y + mm->offset_y, data->map_data.height)
-			|| !ft_valid_coordinate(x + mm->offset_x, data->map_data.width))
+		if (!ft_valid_coordinate(y + mm->offset_y, data->map_height)
+			|| !ft_valid_coordinate(x + mm->offset_x, data->map_width))
 			line[x] = '\0';
 		else if ((int)data->player.pos_x == (x + mm->offset_x)
 			&& (int)data->player.pos_y == (y + mm->offset_y))
@@ -65,7 +65,7 @@ static char	**ft_create_minimap(t_data *data, t_minimap *minimap)
 	if (!mini_map)
 		return (NULL);
 	y = 0;
-	while (y < minimap->size && y < data->map_data.height)
+	while (y < minimap->size && y < data->map_height)
 	{
 		mini_map[y] = ft_add_line(data, minimap, y);
 		if (!mini_map[y])
@@ -88,9 +88,9 @@ void	ft_render_minimap(t_data *data)
 	minimap.size = (2 * minimap.distance) + 1;
 	minimap.tile_size = MINIMAP_PXL_SIZE / (2 * minimap.distance);
 	minimap.offset_x = ft_minimap_offset(&minimap,
-			data->map_data.width, (int)data->player.pos_x);
+			data->map_width, (int)data->player.pos_x);
 	minimap.offset_y = ft_minimap_offset(&minimap,
-			data->map_data.height, (int)data->player.pos_y);
+			data->map_height, (int)data->player.pos_y);
 	minimap.map = ft_create_minimap(data, &minimap);
 	if (!minimap.map)
 		ft_exit(data, "Error: Malloc failed!!\n");

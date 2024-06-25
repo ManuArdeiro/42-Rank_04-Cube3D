@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:59:20 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 20:37:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:35:45 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static bool	is_valid_pos(t_data *data, double x, double y)
 {
 	if (!BONUS_FLAG)
 	{
-		if (x < 0.25 || x >= data->map_data.width - 1.25)
+		if (x < 0.25 || x >= data->map_width - 1.25)
 			return (false);
-		if (y < 0.25 || y >= data->map_data.height -0.25)
+		if (y < 0.25 || y >= data->map_height -0.25)
 			return (false);
 		return (true);
 	}
