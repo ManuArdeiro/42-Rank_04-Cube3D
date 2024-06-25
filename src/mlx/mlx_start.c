@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:03:07 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 21:44:59 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:32:17 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_mlx_img(t_data *data, t_img *image, int width, int height)
 
 void	ft_texture_img(t_data *data, t_img *image, char *path)
 {
-	ft_mlx_img(data, image, data->window_width, data->window_height);
+	ft_img_init(image);
 	image->img = mlx_xpm_file_to_image(data->mlx, path, &data->texture.size,
 			&data->texture.size);
 	if (image->img == NULL)
@@ -40,7 +40,7 @@ void	ft_mlx_start(t_data *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		ft_exit(data, "Error: mlx_init failed!!\n");
-	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cube");
 	if (!data->window)
 		ft_exit(data, "Error: mlx_new_window failed!!\n");
 	if (BONUS_FLAG)

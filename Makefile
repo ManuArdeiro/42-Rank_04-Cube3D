@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/06/24 23:22:06 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/06/25 16:35:16 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ PARSING         =   checks.c colors_aux.c colors.c map.c parse.c rgb_to_hex.c \
 
 RENDER          =   raycasting.c render.c texture.c
 
-UTILS           =   free_mem.c  menu.c struct_data.c struct_img.c struct_ray.c \
-                    struct_texture.c
+UTILS           =   close.c free_mem.c  menu.c struct_data.c struct_img.c \
+                    struct_ray.c struct_texture.c
 
 TESTS           =   print_info.c
 
@@ -55,39 +55,40 @@ OBJS            =   $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJS_BONUS      =   $(SRC_BONUS:%.c=$(OBJ_DIR)/%.o)
 
 $(OBJ_DIR)/%.o : %.c
-	@mkdir -p $(@D)
-	$(COMPILE.c) -DBONUS=$(BONUS_FLAG) -I/usr/include -Imlx_linux -O3 $< -o $@
+			@mkdir -p $(@D)
+			$(COMPILE.c) -DBONUS_FLAG=$(BONUS_FLAG) -I/usr/include -Imlx_linux -O3 $< -o $@
 
-all: $(NAME)
+all: 		$(NAME)
 
-$(NAME): $(LIBFT) $(OBJS) $(OBJS_BONUS)
-	@echo "$(YELLOW) ...Creating Cube3D... $(WHITE)\n"
-	$(CC) $(CFLAGS) -DBONUS_FLAG=$(BONUS_FLAG) $(OBJS) $(LIBFT) -Lmlx_linux \
-	-lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
-	@echo "\n$(LIGHT_GRAY)---------- Cube3D Ready ------------\n"
+$(NAME):	$(LIBFT) $(OBJS) $(OBJS_BONUS)
+			@echo "\n$(YELLOW) ...Creating Cube3D... $(WHITE)"
+			$(CC) $(CFLAGS) -DBONUS_FLAG=$(BONUS_FLAG) $(OBJS) $(LIBFT) -Lmlx_linux \
+			-lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+			@echo "\n$(LIGHT_GRAY)--- Cube3D Ready ---\n"
 
-bonus:
-	make all BONUS_FLAG=1
+bonus:		BONUS_FLAG=1
+bonus: 
+			make all
 
 .SILENT:
 $(LIBFT):
-	echo "$(LIGHT_RED) ...Creating libft files... $(WHITE)\n"
-	$(MAKE) -C $(LIBFTDIR)
-	@echo "$(GREEN) ...libft created... $(WHITE)\n"
+			echo "$(LIGHT_RED) ...Creating libft files... $(WHITE)\n"
+			$(MAKE) -C $(LIBFTDIR)
+			@echo "$(GREEN) ...libft created... $(WHITE)\n"
 
 clean:
-	@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
-	$(MAKE) clean -C $(LIBFTDIR) 
-	$(RM) $(OBJS) $(OBJS_BONUS)
+			@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
+			$(MAKE) clean -C $(LIBFTDIR) 
+			$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFTDIR)
-	$(RM) $(NAME) $(OBJ_DIR)
-	@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
+			$(MAKE) fclean -C $(LIBFTDIR)
+			$(RM) $(NAME) $(OBJ_DIR)
+			@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: 	all clean fclean re bonus
 
 # COLORS
 RED             = \033[0;31m

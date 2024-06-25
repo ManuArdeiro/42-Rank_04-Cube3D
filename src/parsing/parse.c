@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/22 21:00:41 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:52:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ int ft_parsing(t_data *data, char *map_path)
 		else
 			break ;
 	}
-	//ft_print_info(data);
 	return (EXIT_SUCCESS);
 }

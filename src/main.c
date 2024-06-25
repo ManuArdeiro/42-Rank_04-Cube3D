@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/24 22:01:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:26:32 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static void	ft_game(t_data *data)
 {
-	ft_print_menu();
-	ft_mlx_start(data);
 	ft_initial_player_dir(data);
+	ft_mlx_start(data);
 	ft_texture_start(data);
 	ft_render_img(data);
 	ft_user_input(data);

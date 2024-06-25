@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 01:55:05 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/22 21:01:08 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:21:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	ft_get_map_edges(t_data *data, t_list **temp, int *start, int *end)
 
 void	ft_save_path(t_data *data, char *path, char *cardinal)
 {
-	if (!ft_strncmp(path, data->north_path, ft_strlen(path)))
+	/*if (!ft_strncmp(path, data->north_path, ft_strlen(path)))
 		ft_exit(data, "Error: Duplicate texture!!\n");
 	else if (!ft_strncmp(path, data->south_path, ft_strlen(path)))
 		ft_exit(data, "Error: Duplicate texture!!\n");
 	else if (!ft_strncmp(path, data->east_path, ft_strlen(path)))
 		ft_exit(data, "Error: Duplicate texture!!\n");
 	else if (!ft_strncmp(path, data->west_path, ft_strlen(path)))
-		ft_exit(data, "Error: Duplicate texture!!\n");
+		ft_exit(data, "Error: Duplicate texture!!\n");*/
 	if (!ft_strncmp(cardinal, "NO", 2))
 		data->north_path = ft_strdup(path);
 	else if (!ft_strncmp(cardinal, "SO", 2))

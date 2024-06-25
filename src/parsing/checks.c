@@ -6,13 +6,42 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:22:54 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/22 21:00:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:56:32 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	ft_invalid_chars(t_data *data, char *line, int *count)
+static void	ft_get_player(t_data *data, char dir, int i, double *y)
+{
+	if (dir == 'N')
+	{
+		data->player.dir = 'N';
+		data->player.pos_y = *y + 0.5;
+		data->player.pos_x = i + 0.5;
+	}
+	else if (dir == 'S')
+	{
+		data->player.dir = 'S';
+		data->player.pos_y = *y + 0.5;
+		data->player.pos_x = i + 0.5;
+	}
+	else if (dir == 'E')
+	{
+		data->player.dir = 'E';
+		data->player.pos_y = *y + 0.5;
+		data->player.pos_x = i + 0.5;
+	}
+	else if (dir == 'W')
+	{
+		data->player.dir = 'W';
+		data->player.pos_y = *y + 0.5;
+		data->player.pos_x = i + 0.5;
+	}
+	return ;
+}
+
+static void	ft_invalid_chars(t_data *data, char *line, int *count, double *y)
 {
 	int	i;
 
@@ -25,7 +54,10 @@ static void	ft_invalid_chars(t_data *data, char *line, int *count)
 			ft_exit(data, "Error: Invalid character in map!!\n");
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
+		{
 			(*count)++;
+			ft_get_player(data, line[i], i, y);
+		}
 		if (*count > 1)
 			ft_exit(data, "Error: More than one player!!\n");
 		i++;
@@ -71,18 +103,21 @@ int	ft_check_map_dup(t_data *data, const char *line)
 void	ft_check_invalid_chars(t_data *data, t_list **temp)
 {
 	int		count;
+	double	y;
 	char	*line;
 	t_list	*aux;
 
 	count = 0;
 	aux = *temp;
 	line = (char *)aux->content;
-	ft_invalid_chars(data, line, &count);
+	y = 0;
+	ft_invalid_chars(data, line, &count, &y);
 	while (aux->next)
 	{
 		aux = aux->next;
 		line = (char *)aux->content;
-		ft_invalid_chars(data, line, &count);
+		y++;
+		ft_invalid_chars(data, line, &count, &y);
 	}
 	return ;
 }

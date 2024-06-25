@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/24 23:04:24 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:09:37 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@
 # define WINDOW_WIDTH 	960
 # define WINDOW_HEIGHT 	720
 # define TEXTURE_SIZE 	64
-# define MOVE_SPEED 	0.025
-# define ROT_SPEED 		0.025
-# define MOUSE_STEP		15	
+# define MOVE_SPEED 	0.0125
+# define ROT_SPEED 		0.015
+# define MOUSE_STEP		20	
 //	Minimap:
 # define MINIMAP_PXL_SIZE 		128
 # define MINIMAP_DISTANCE 		5
@@ -270,11 +270,13 @@ void		ft_render_img(t_data *data);
 void		ft_texture_pixels_update(t_data *data, t_texture *tex, t_ray *ray,
 				int x);
 
+//  File src/utils/close.c
+void		ft_exit(t_data *data, char *error);
+int			ft_close(t_data *data);
+
 //  File src/utils/free_mem.c
 void		ft_free_matrix(void **tab);
 void		ft_free_mem(t_data *data);
-void		ft_exit(t_data *data, char *error);
-int			ft_close(t_data *data);
 
 //  File src/utils/menu.c
 void		ft_print_menu(void);
