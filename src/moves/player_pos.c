@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:59:20 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 14:36:31 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:05:59 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static bool	is_valid_pos(t_data *data, double x, double y)
 	if (!BONUS_FLAG)
 	{
 		if (x < 0.25 || x >= data->map_width - 1.25)
-			return (false);
+			return (EXIT_FAILURE);
 		if (y < 0.25 || y >= data->map_height -0.25)
-			return (false);
-		return (true);
+			return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	}
 	if (BONUS_FLAG)
 	{
-		if (data->map[(int)y][(int)x] == '0')
-			return (true);
+		if (data->map[(int)y][(int)x] != '1')
+			return (EXIT_SUCCESS);
 	}
-	return (false);
+	return (EXIT_FAILURE);
 }
 
 int	ft_move_validation(t_data *data, double new_x, double new_y)
@@ -35,12 +35,12 @@ int	ft_move_validation(t_data *data, double new_x, double new_y)
 	int	moved;
 
 	moved = EXIT_FAILURE;
-	if (is_valid_pos(data, new_x, data->player.pos_y))
+	if (is_valid_pos(data, new_x, data->player.pos_y) == EXIT_SUCCESS)
 	{
 		data->player.pos_x = new_x;
 		moved = EXIT_SUCCESS;
 	}
-	if (is_valid_pos(data, data->player.pos_x, new_y))
+	if (is_valid_pos(data, data->player.pos_x, new_y) == EXIT_SUCCESS)
 	{
 		data->player.pos_y = new_y;
 		moved = EXIT_SUCCESS;

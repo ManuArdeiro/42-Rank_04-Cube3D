@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/26 14:22:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:14:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@
 # define WINDOW_WIDTH 			960
 # define WINDOW_HEIGHT 			720
 # define TEXTURE_SIZE 			64
-# define MOVE_SPEED 			0.0125
-# define ROT_SPEED 				0.015
+# define MOVE_SPEED 			0.10
+# define ROT_SPEED 				0.05
 # define MOUSE_WINDOW_LIMIT		20	
 //	Minimap:
 # define MINIMAP_PXL_SIZE 		128
