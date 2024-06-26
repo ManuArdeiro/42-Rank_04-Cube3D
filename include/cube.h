@@ -6,16 +6,12 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/25 22:34:24 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:22:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef  CUBE_H
 # define  CUBE_H
-
-# ifndef BONUS_FLAG
-#  define BONUS_FLAG 1
-# endif
 
 //	INCLUDES:
 ////////////////////////////////////////////////////////////////////////////////
@@ -56,13 +52,13 @@
 //	CONSTANTS:
 /////////////////////////////////////////////////////////////////////////////////
 
-# define PI 			3.14159265359
-# define WINDOW_WIDTH 	960
-# define WINDOW_HEIGHT 	720
-# define TEXTURE_SIZE 	64
-# define MOVE_SPEED 	0.0125
-# define ROT_SPEED 		0.015
-# define MOUSE_STEP		20	
+# define PI 					3.14159265359
+# define WINDOW_WIDTH 			960
+# define WINDOW_HEIGHT 			720
+# define TEXTURE_SIZE 			64
+# define MOVE_SPEED 			0.0125
+# define ROT_SPEED 				0.015
+# define MOUSE_WINDOW_LIMIT		20	
 //	Minimap:
 # define MINIMAP_PXL_SIZE 		128
 # define MINIMAP_DISTANCE 		5
@@ -194,6 +190,7 @@ int			main(int argc, char **argv);
 void		ft_render_minimap_img(t_data *data, t_minimap *minimap);
 
 //	File src/bonus/mlx_start__bonus.c
+int			ft_mouse_motion(int x, int y, t_data *data);
 void		ft_mlx_mouse(t_data *data);
 
 //	File src/bonus/render_bonus.c
@@ -326,29 +323,5 @@ void		ft_print_info(t_data *data);
 # define BG_PURPLE	"\e[45m"
 # define BG_CYAN	"\e[46m"
 # define BG_WHITE	"\e[47m"
-
-	# define ERR_FILE_NOT_CUB "Not a .cub file"
-	# define ERR_FILE_NOT_XPM "Not an .xpm file"
-	# define ERR_FILE_IS_DIR "Is a directory"
-	# define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
-	# define ERR_COLOR_FLOOR "Invalid floor RGB color"
-	# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
-	# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
-	# define ERR_INV_LETTER "Invalid character in map"
-	# define ERR_NUM_PLAYER "Map has more than one player"
-	# define ERR_TEX_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
-	# define ERR_TEX_MISSING "Missing texture(s)"
-	# define ERR_TEX_INVALID "Invalid texture(s)"
-	# define ERR_COLOR_MISSING "Missing color(s)"
-	# define ERR_MAP_MISSING "Missing map"
-	# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
-	# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
-	# define ERR_MAP_LAST "Map is not the last element in file"
-	# define ERR_PLAYER_POS "Invalid player position"
-	# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
-	# define ERR_MALLOC "Could not allocate memory"
-	# define ERR_MLX_START "Could not start mlx"
-	# define ERR_MLX_WIN "Could not create mlx window"
-	# define ERR_MLX_IMG "Could not create mlx image"
 
 #endif

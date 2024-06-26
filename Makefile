@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/06/26 01:30:14 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/06/26 14:09:13 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,26 +48,31 @@ UTILS           =   close.c free_mem.c  menu.c struct_data.c struct_img.c \
 
 TESTS           =   print_info.c
 
-SRC             =   $(MLX) $(MOVES) $(PARSING) $(RENDER) $(UTILS) $(TESTS) main.c
-SRC_BONUS       =   $(SRC) $(BONUS)
+SRC             =   $(MLX) $(MOVES) $(PARSING) $(RENDER) $(UTILS) \
+					$(TESTS) main.c
+SRC_BONUS       =   $(BONUS)
 
 OBJS            =   $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJS_BONUS      =   $(SRC_BONUS:%.c=$(OBJ_DIR)/%.o)
 
 $(OBJ_DIR)/%.o : %.c
-			@mkdir -p $(@D)
-			$(COMPILE.c) -DBONUS_FLAG=$(BONUS_FLAG) -I/usr/include -Imlx_linux -O3 $< -o $@
+	@mkdir -p $(@D)
+	$(COMPILE.c) -DBONUS_FLAG=$(BONUS_FLAG) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 all: 		$(NAME)
 
 $(NAME):	$(LIBFT)  $(OBJS)
-			@echo "\n$(YELLOW) ...Creating Cube3D... $(WHITE)"
-			$(CC) $(CFLAGS) -DBONUS_FLAG=$(BONUS_FLAG) $(OBJS) $(LIBFT) -Lmlx_linux \
+			@echo "\n$(YELLOW) ...Creating Cube3D ... $(WHITE)"
+			$(CC) $(CFLAGS) -DBONUS_FLAG=0 $(OBJS) $(LIBFT) -Lmlx_linux \
 			-lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 			@echo "\n\n$(LIGHT_GRAY)--- Cube3D Ready ---\n"
 
-bonus:		$(OBJS_BONUS)
-			make all BONUS_FLAG=1
+bonus:		BONUS_FLAG = 1
+bonus:		fclean $(LIBFT)  $(OBJS) $(OBJS_BONUS)
+			@echo "\n$(YELLOW) ...Creating Cube3D with bonus ... $(WHITE)"
+			$(CC) $(CFLAGS) -DBONUS_FLAG=1 $(OBJS) $(OBJS_BONUS) $(LIBFT) \
+			-Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+			@echo "\n\n$(LIGHT_GRAY)--- Cube3D with bonus Ready ---\n"
 
 
 $(LIBFT):
@@ -80,7 +85,7 @@ clean:
 			$(MAKE) clean -C $(LIBFTDIR) 
 			$(RM) $(OBJS) $(OBJS_BONUS)
 
-fclean: clean
+fclean:		clean
 			$(MAKE) fclean -C $(LIBFTDIR)
 			$(RM) $(NAME) $(OBJ_DIR)
 			@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"

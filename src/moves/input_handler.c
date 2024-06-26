@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:58:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 01:11:54 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:34:16 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,38 +40,13 @@ static int	ft_key_release(int key, t_data *data)
 	else if (key == XK_s && data->player.move_y == -1)
 		data->player.move_y = 0;
 	else if (key == XK_a && data->player.move_x == -1)
-		data->player.move_x += 1;
+		data->player.move_x = 0;
 	else if (key == XK_d && data->player.move_x == 1)
-		data->player.move_x -= 1;
+		data->player.move_x = 0;
 	else if (key == XK_Left && data->player.rotate <= 1)
 		data->player.rotate = 0;
 	else if (key == XK_Right && data->player.rotate >= -1)
 		data->player.rotate = 0;
-	return (EXIT_SUCCESS);
-}
-
-static int	ft_mouse_motion(int x, int y, t_data *data)
-{
-	static int	old_x;
-	
-	old_x = WINDOW_WIDTH / 2;
-	if (x > data->window_width - MOUSE_STEP)
-	{
-		x = MOUSE_STEP;
-		mlx_mouse_move(data->mlx, data->window, x, y);
-	}
-	if (x < MOUSE_STEP)
-	{
-		x = data->window_width - MOUSE_STEP;
-		mlx_mouse_move(data->mlx, data->window, x, y);
-	}
-	if (x == old_x)
-		return (0);
-	else if (x < old_x)
-		data->player.has_moved = ft_player_rotate(&data);
-	else if (x > old_x)
-		data->player.has_moved += ft_player_rotate(&data);
-	old_x = x;
 	return (EXIT_SUCCESS);
 }
 

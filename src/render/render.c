@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:02:04 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 20:37:35 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:36:46 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_render_img(t_data *data)
 	ft_ray_init(&data->ray);
 	ft_raycasting(&data->player, data);
 	ft_render_frame(data);
-	if (BONUS_FLAG)
-		ft_render_minimap(data);
+	/*if (BONUS_FLAG)
+		ft_render_minimap(data);*/
 	return	;
 }
