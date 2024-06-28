@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu.c                                             :+:      :+:    :+:   */
+/*   menu_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 11:03:11 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/27 19:43:45 by jolopez-         ###   ########.fr       */
+/*   Created: 2024/06/27 17:36:54 by jolopez-          #+#    #+#             */
+/*   Updated: 2024/06/27 19:43:33 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-/*	ft_print_menu() prints the menu. */
+/*	ft_print_menu_bonus() prints the bonus menu. */
 
-void	ft_print_menu(void)
+void	ft_print_menu_bonus(void)
 {
 	printf(CYAN "\n");
 	printf(" .d8888b.           888                .d8888b.  8888888b. \n");
@@ -32,5 +32,6 @@ void	ft_print_menu(void)
 	printf(GREEN "\tD" WHITE ": strafe right\n");
 	printf(BLUE "\t<" WHITE ": rotate left\t");
 	printf(BLUE "\t>" WHITE ": rotate right\n");
+	printf(PURPLE "\tMouse" YELLOW ": rotate view\n");
 	printf("\n");
 }

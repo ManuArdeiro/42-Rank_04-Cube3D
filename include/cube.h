@@ -6,12 +6,16 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/26 21:14:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:01:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef  CUBE_H
 # define  CUBE_H
+
+# ifndef BONUS
+#  define BONUS 1
+# endif
 
 //	INCLUDES:
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +147,7 @@ typedef struct	s_texture
 typedef struct	s_minimap
 {
 	int		size;
-	int		tile_size;
+	int		block_size;
 	int		distance;
 	int		offset_x;
 	int		offset_y;
@@ -185,6 +189,9 @@ typedef struct s_data
 
 //  File src/main.c
 int			main(int argc, char **argv);
+
+//	File src/bonus/menu_bonus.c
+void		ft_print_menu_bonus(void);
 
 //	File src/bonus/minimap_image_bonus.c
 void		ft_render_minimap_img(t_data *data, t_minimap *minimap);

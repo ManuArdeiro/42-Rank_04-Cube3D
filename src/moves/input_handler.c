@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:58:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 19:52:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/26 22:57:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	ft_user_input(t_data *data)
 		mlx_hook(data->window, MotionNotify, PointerMotionMask, ft_mouse_motion,
 			data);
 	mlx_loop_hook(data->mlx, ft_render_loop, data);
+	mlx_loop(data->mlx);
 	return ;
 }

@@ -6,12 +6,17 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:03:07 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 19:51:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/29 01:37:39 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Creates a new MLX image and initializes the image structure for rendering.
+	 -> ft_img_init(image): initializes the image structure to default values.
+	 -> mlx_new_image() creates a new image with the specified width and height.
+	 -> mlx_get_data_addr() retrieves the address of the image data and other
+		image properties.	*/
 void	ft_mlx_img(t_data *data, t_img *image, int width, int height)
 {
 	ft_img_init(image);
@@ -23,6 +28,14 @@ void	ft_mlx_img(t_data *data, t_img *image, int width, int height)
 	return ;
 }
 
+/*	First at all it initializes the fields of the image structure to default
+	values via ft_img_init(). Then loads a texture image from a file (path)
+	and initializes the image structure for rendering.
+	 -> ft_img_init(image): initializes the image structure.
+	 -> mlx_xpm_file_to_image() loads the XPM file specified by path and
+		creates an MLX image.
+	 -> mlx_get_data_addr() retrieves the address of the image data and other
+		image properties.	*/
 void	ft_texture_img(t_data *data, t_img *image, char *path)
 {
 	ft_img_init(image);
@@ -35,6 +48,13 @@ void	ft_texture_img(t_data *data, t_img *image, char *path)
 	return ;
 }
 
+/*	Initializes the MLX library and creates a new window for rendering the
+	game.
+	 -> ft_mlx_mouse() sets up mouse-related functionality if the BONUS_FLAG
+		is set.
+	Parameters:
+	 -> data: A pointer to the game's data structure, which includes MLX and
+		window handles.	*/
 void	ft_mlx_start(t_data *data)
 {
 	data->mlx = mlx_init();

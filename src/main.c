@@ -6,12 +6,18 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/26 01:00:22 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:25:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	In the ft_game() function:
+        -> ft_initial_player_dir() will init the player's initial direction.
+        -> ft_mlx_start() will start the mlx graphics library.
+        -> ft_texture_start() will start the walls textures.
+        -> ft_render_img)() will render the first image.
+        -> ft_user_input() manages the user inputs (moves and rotations).	*/
 static void	ft_game(t_data *data)
 {
 	ft_initial_player_dir(data);
@@ -19,10 +25,11 @@ static void	ft_game(t_data *data)
 	ft_texture_start(data);
 	ft_render_img(data);
 	ft_user_input(data);
-	mlx_loop(data->mlx);
 	return ;
 }
 
+/* ft_check_args() function checks the number of arguments and the 
+	extension. */
 static int	ft_check_args(const int argc, const char **argv)
 {
 	int		i;
@@ -52,6 +59,12 @@ static int	ft_check_args(const int argc, const char **argv)
 	return (EXIT_SUCCESS);
 }
 
+/*	The main() function:
+		->	Initializes the principal t_data structure.
+		->	Checks the arguments passed to the program.
+		->	Parses the .cub file.
+		->	Prints the start menu.
+		->	Starts the game.	*/
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -67,7 +80,10 @@ int	main(int argc, char **argv)
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
 	if (ft_parsing(data, argv[1]))
 		return (ft_free_mem(data), free(data), EXIT_FAILURE);
-	ft_print_menu();
+	if (BONUS_FLAG)
+		ft_print_menu_bonus();
+	else
+		ft_print_menu();
 	ft_game(data);
 	return (ft_free_mem(data), free(data), EXIT_SUCCESS);
 }

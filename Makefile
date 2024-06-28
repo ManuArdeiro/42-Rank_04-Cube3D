@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/04 01:04:09 by Ardeiro           #+#    #+#              #
-#    Updated: 2024/06/26 14:09:13 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/06/27 17:38:28 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ CC              =   gcc
 CFLAGS          =   -Wall -Werror -Wextra $(INCLUDE) $(SANITIZER)
 
 #-------------------------- C Files -------------------------------------
-BONUS       	=   minimap_image_bonus.c mlx_start_bonus.c \
+BONUS       	=   menu_bonus.c minimap_image_bonus.c mlx_start_bonus.c \
 					render_minimap_bonus.c
 
 MLX             =   loop_function.c mlx_start.c
@@ -68,7 +68,7 @@ $(NAME):	$(LIBFT)  $(OBJS)
 			@echo "\n\n$(LIGHT_GRAY)--- Cube3D Ready ---\n"
 
 bonus:		BONUS_FLAG = 1
-bonus:		fclean $(LIBFT)  $(OBJS) $(OBJS_BONUS)
+bonus:		clean $(LIBFT) $(OBJS) $(OBJS_BONUS)
 			@echo "\n$(YELLOW) ...Creating Cube3D with bonus ... $(WHITE)"
 			$(CC) $(CFLAGS) -DBONUS_FLAG=1 $(OBJS) $(OBJS_BONUS) $(LIBFT) \
 			-Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
@@ -82,7 +82,7 @@ $(LIBFT):
 
 clean:
 			@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
-			$(MAKE) clean -C $(LIBFTDIR) 
+			$(MAKE) clean -C $(LIBFTDIR)
 			$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean:		clean
