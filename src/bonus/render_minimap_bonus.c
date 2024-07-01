@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:01:40 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/29 01:22:48 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:14:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool	ft_valid_coordinate(int coord, int size)
 	the map data. It first allocates memory for a line of the minimap and
 	populates it with characters representing the player, walls, and open
 	spaces, taking into account the necessary offsets.
-	 -> minimap->size: the total number of blocks in each dimension
+	 -> minimap->size: the total number of tiles in each dimension
 		(width and height) of the minimap.
  	 -> ft_valid_coordinate() checks if the coordinate is within the bounds
 	 	of the map.
@@ -90,7 +90,7 @@ static char	*ft_add_line(t_data *data, t_minimap *mm, int y)
 	and the player's position iterating through the y axis data to build
 	the simplified horizontal lines representation (x axis) that will be
 	rendered later.
- 	 -> minimap.size: the total number of blocks in each dimension
+ 	 -> minimap.size: the total number of tiles in each dimension
 	 	(width and height) of the minimap.
 	 -> ft_add_line() adds a line to the minimap for each row.
 	 -> ft_free_matrix() frees the allocated memory if an error occurs
@@ -124,8 +124,8 @@ static char	**ft_create_minimap(t_data *data, t_minimap *minimap)
 	calculates the necessary offsets to ensure the minimap is centered around
 	the player, then iterates through the map data to draw each element at the 
 	correct position on the minimap.
-	 -> distance: number of visible blocks from the player.
-	 -> mimimap.size: the total number of blocks in each dimension (width and
+	 -> distance: number of visible tiles from the player.
+	 -> mimimap.size: the total number of tiles in each dimension (width and
 	 	height) of the minimap.
 	 -> offset: the position where the minimap starts to keep the player
 	 	centered.
@@ -141,7 +141,7 @@ void	ft_render_minimap(t_data *data)
 	minimap.img = &data->minimap_img;
 	minimap.distance = MINIMAP_DISTANCE;
 	minimap.size = (2 * minimap.distance) + 1;
-	minimap.block_size = MINIMAP_PXL_SIZE / (2 * minimap.distance);
+	minimap.tile_size = MINIMAP_PXL_SIZE / (2 * minimap.distance);
 	minimap.offset_x = ft_minimap_offset(&minimap,
 			data->map_width, (int)data->player.pos_x);
 	minimap.offset_y = ft_minimap_offset(&minimap,

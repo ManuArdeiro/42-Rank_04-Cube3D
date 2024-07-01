@@ -6,12 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:35:44 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/24 21:56:38 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:50:11 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Allocates memory for the map array in the t_data structure.	*/
 static void	ft_calloc_map(t_data *data)
 {
 	int	i;
@@ -32,8 +33,10 @@ static void	ft_calloc_map(t_data *data)
 	return ;
 }
 
+/*	Initializes all relevant fields in the t_data structure.	*/
 void	ft_data_init(t_data *data)
 {
+	data->mouse_old_x = WINDOW_HEIGHT / 2;
 	data->map_width = -1;
 	data->map_height = -1;
 	data->window_height = WINDOW_HEIGHT;

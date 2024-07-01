@@ -6,12 +6,21 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 03:06:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 01:01:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:44:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Exits the application with an error message.
+	 -> Prints the error message using perror().
+	 -> If minimap image and mlx instance are present, destroys the minimap
+	 	image.
+	 -> If window and mlx instance are present, destroys the window.
+	 -> If mlx instance is present, destroys the display, ends the loop, and
+	 	frees mlx.
+	 -> Frees all allocated memory and exits the program with EXIT_FAILURE
+	 	status.	*/
 void	ft_exit(t_data *data, char *error)
 {
 	perror(error);
@@ -30,6 +39,15 @@ void	ft_exit(t_data *data, char *error)
 	exit(EXIT_FAILURE);
 }
 
+/*	Closes the application gracefully.
+	 -> Prints a goodbye message to the console.
+	 -> If minimap image and mlx instance are present, destroys the minimap
+	 	image.
+	 -> If window and mlx instance are present, destroys the window.
+	 -> If mlx instance is present, destroys the display, ends the loop, and
+	 	frees mlx.
+	 -> Frees all allocated memory and exits the program with EXIT_SUCCESS
+	 	status.	*/
 int	ft_close(t_data *data)
 {
 	printf(WHITE "\nGame closed!! Come to play again soon :)\n\n");

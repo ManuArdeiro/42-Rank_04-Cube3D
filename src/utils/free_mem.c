@@ -6,12 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:02:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 03:14:39 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:48:33 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Frees a given variable if it is not NULL.	*/
 static void	ft_free_var(void *var)
 {
 	if (var)
@@ -19,6 +20,7 @@ static void	ft_free_var(void *var)
 	return ;
 }
 
+/*	Frees all textures and and texture_pixels in the t_data structure.	*/
 static void ft_free_texture(t_data *data)
 {
 	if (data->texture.texture[NORTH])
@@ -36,6 +38,8 @@ static void ft_free_texture(t_data *data)
 	return ;
 }
 
+/*	Frees a 2D array (matrix) and the array itself, and sets the pointer
+	to NULL.	*/
 void	ft_free_matrix(void **tab)
 {
 	size_t	i;
@@ -51,6 +55,7 @@ void	ft_free_matrix(void **tab)
 	return ;
 }
 
+/*	Frees all allocated memory in the t_data structure.	*/
 void	ft_free_mem(t_data *data)
 {
 	int	i;

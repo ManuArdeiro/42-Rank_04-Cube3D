@@ -6,12 +6,18 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:04:45 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:45 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:32:51 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/* Converts an XPM image to an image buffer.
+	 -> Calls ft_texture_img() to load the XPM image into the image structure.
+	 -> Allocates memory for the buffer and copies the pixel data from the
+	 	image structure to the buffer.
+	 -> Frees the image from memory and returns the buffer containing the
+	 	image pixels. */
 static int	*ft_xpm_to_img(t_data *data, char *path)
 {
 	int		x;
@@ -40,6 +46,7 @@ static int	*ft_xpm_to_img(t_data *data, char *path)
 	return (buffer);
 }
 
+/* Initializes the texture pixel array in the t_data structure. */
 void	ft_texture_pixels_init(t_data *data)
 {
 	int	i;
@@ -61,6 +68,7 @@ void	ft_texture_pixels_init(t_data *data)
 	}
 }
 
+/* Initializes the texture structure in the t_data structure. */
 void	ft_texture_init(t_data *data)
 {
 	data->texture.x = 0;
@@ -77,6 +85,8 @@ void	ft_texture_init(t_data *data)
 	return ;
 }
 
+/*	Loads the textures from the file paths specified in t_data calling
+	ft_xpm_to_img() to load each texture image.*/
 void	ft_texture_start(t_data *data)
 {
 	data->texture.texture[NORTH] = ft_xpm_to_img(data, data->north_path);

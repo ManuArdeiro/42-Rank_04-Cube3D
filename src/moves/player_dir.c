@@ -6,12 +6,19 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:58:46 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 19:53:43 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:19:56 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Sets the player's direction and plane vectors based on the initial direction
+	(if it is North or South).
+	 -> If the player's direction is 'S', sets direction to (0, 1) and plane
+		to (-0.66, 0).
+	 -> If the player's direction is 'N', sets direction to (0, -1) and plane
+		to (0.66, 0).	
+	These vectors are perpendicular, of course.	*/
 static void	ft_north_south_axis(t_player *player)
 {
 	if (player->dir == 'S')
@@ -31,6 +38,13 @@ static void	ft_north_south_axis(t_player *player)
 	return ;
 }
 
+/*	Sets the player's direction and plane vectors based on the initial direction
+	(if it is East or West).
+	 -> If the player's direction is 'W', sets direction to (-1, 0) and plane
+		to (0, -0.66).
+	 -> If the player's direction is 'E', sets direction to (1, 0) and plane
+	 	to (0, 0.66).
+	These vectors are perpendicular, of course.	*/
 static void	ft_east_west_axis(t_player *player)
 {
 	if (player->dir == 'W')
@@ -50,6 +64,9 @@ static void	ft_east_west_axis(t_player *player)
 	return ;
 }
 
+/*	Initializes the player's direction and plane vectors based on the initial
+	direction of the player specified in the map .cub (N, E, S or W) calling
+	helper functions to set the vectors for North-South and East-West directions. */
 void	ft_initial_player_dir(t_data *data)
 {
 	ft_north_south_axis(&data->player);

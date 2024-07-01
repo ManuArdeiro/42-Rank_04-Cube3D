@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:03:07 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/29 01:37:39 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:01:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_mlx_img(t_data *data, t_img *image, int width, int height)
 	return ;
 }
 
-/*	First at all it initializes the fields of the image structure to default
+/*	Loads a XPM file to an image:
+	First at all it initializes the fields of the image structure to default
 	values via ft_img_init(). Then loads a texture image from a file (path)
 	and initializes the image structure for rendering.
 	 -> ft_img_init(image): initializes the image structure.

@@ -6,12 +6,17 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:02:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/23 02:03:14 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:37:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Determines the texture index based on the ray's side and direction.
+	 -> If the ray hits a vertical wall (side 0), checks the x-direction of the
+   		ray.
+	 -> If the ray hits a horizontal wall (side 1), checks the y-direction of
+	 	the ray. */
 static void	ft_texture_index(t_data *data, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -30,6 +35,18 @@ static void	ft_texture_index(t_data *data, t_ray *ray)
 	}
 }
 
+/*	Updates the texture pixels for the screen column based on the ray
+	properties.
+   -> Determines the texture index using ft_texture_index().
+   -> Calculates the texture's x-coordinate based on the wall hit position.
+      -> Adjusts the x-coordinate for texture mirroring if needed.
+   -> Calculates the texture step for vertical scaling.
+   -> Initializes the texture position for the current column.
+   -> Loops through each pixel in the column within the draw range.
+      -> Calculates the texture's y-coordinate and updates the texture position.
+      -> Retrieves the color from the texture at the calculated coordinates.
+      -> Darkens the color if the texture index is NORTH or EAST.
+      -> Updates the pixel in the texture_pixels array if the color is valid. */
 void	ft_texture_pixels_update(t_data *data, t_texture *texture,
 			t_ray *ray, int x)
 {

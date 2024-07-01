@@ -6,12 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 02:04:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/23 02:08:18 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:57:06 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Initializes the t_ray structure fields to default values.	*/
 void	ft_ray_init(t_ray *ray)
 {
 	ray->camera_x = 0;

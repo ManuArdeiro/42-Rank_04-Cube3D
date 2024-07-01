@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:06:18 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/28 19:18:08 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:56:07 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 	- data: A pointer to the game's data structure.
 	The function first checks if the mouse is near the edges of the window, if
 	so resets the mouse's x-position to the limit (for both saides). If not, if
-	the mouse's x-coordinate is in the left half of the window, it triggers a
-	player rotation to the left,if the x-coordinate is in the right half, it
+	the mouse's x-coordinate is fewer than the last position, it triggers a
+	player rotation to the left,if the x-coordinate is higher then it
 	triggers a rotation to the right. The rotation is performed by the 
 	ft_player_rotate() function. */
 int	ft_mouse_motion(int x, int y, t_data *data)
@@ -31,15 +31,24 @@ int	ft_mouse_motion(int x, int y, t_data *data)
 		x = MOUSE_WINDOW_LIMIT;
 		mlx_mouse_move(data->mlx, data->window, x, y);
 	}
-	if (x < MOUSE_WINDOW_LIMIT)
+	else if (x < MOUSE_WINDOW_LIMIT)
 	{
 		x = data->window_width - MOUSE_WINDOW_LIMIT;
 		mlx_mouse_move(data->mlx, data->window, x, y);
 	}
-	else if (x < data->window_width / 2)
+	else if (x < data->mouse_old_x)
+	{
+		printf("x = %d data->player.pos_x = %f\n", x, data->player.pos_x);
+		data->player.rotate -= 1;
 		data->player.has_moved += ft_player_rotate(&data);
-	else if (x >= data->window_width / 2)
+	}
+	else if (x > data->mouse_old_x)
+	{
+		printf("x = %d data->player.pos_x = %f\n", x, data->player.pos_x);
+		data->player.rotate += 1;
 		data->player.has_moved += ft_player_rotate(&data);
+	}
+	data->mouse_old_x = x;
 	return (EXIT_SUCCESS);
 }
 

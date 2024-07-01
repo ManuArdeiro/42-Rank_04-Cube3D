@@ -6,12 +6,16 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 20:58:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/26 22:57:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:13:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Handles key press events for the application:
+	 -> If the Escape key is released, close the application.
+	 -> If the movement/rotation keys are pressed it moves/rotates the player.
+	 -> Finally returns EXIT_SUCCESSS.	*/
 static int	ft_key_press(int key, t_data *data)
 {
 	if (key == XK_Escape)
@@ -31,6 +35,11 @@ static int	ft_key_press(int key, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+/*	Handles key release events for the application:
+	 -> If the Escape key is released, close the application.
+	 -> If the movement/rotation keys are released and the player is moving
+		or is rotating, stops the player's movement/rotation.
+	 -> Finally returns EXIT_SUCCESSS.	*/
 static int	ft_key_release(int key, t_data *data)
 {
 	if (key == XK_Escape)
@@ -50,6 +59,15 @@ static int	ft_key_release(int key, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+/*	This function sets up the event handlers for user input in a graphical
+	application using the MiniLibX library; when key is pressed, when key is
+	released and when window is closed.
+	 -> If the BONUS_FLAG is set, also register a callback for mouse motion
+		events.
+	 -> mlx_loop_hook() sets a function to be called repeatedly at every loop
+		iteration, used for rendering.
+	 -> mlx_loop() starts the event loop, blocking the program execution here
+	 	until the window is closed.	*/
 void	ft_user_input(t_data *data)
 {
 	mlx_hook(data->window, DestroyNotify, NoEventMask, ft_close, data);

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/06/28 16:01:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:53:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ typedef struct	s_texture
 typedef struct	s_minimap
 {
 	int		size;
-	int		block_size;
+	int		tile_size;
 	int		distance;
 	int		offset_x;
 	int		offset_y;
@@ -166,6 +166,7 @@ typedef struct	s_map
 
 typedef struct s_data
 {
+	int			mouse_old_x;
 	int			map_width;
 	int			map_height;
 	int			window_height;
