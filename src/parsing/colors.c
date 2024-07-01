@@ -6,12 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:03:45 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:45:43 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:51:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Reads and checks the floor RGB values in a string, and save them.	*/
 static void	ft_read_floor(t_data *data, const char *str, char *number, int *i)
 {
 	int	j;
@@ -36,6 +37,7 @@ static void	ft_read_floor(t_data *data, const char *str, char *number, int *i)
 	return ;
 }
 
+/*	Reads and checks the ceiling RGB values in a string, and save them.	*/
 static void	ft_read_ceiling(t_data *data, const char *str, char *number, int *i)
 {
 	int	j;
@@ -60,6 +62,8 @@ static void	ft_read_ceiling(t_data *data, const char *str, char *number, int *i)
 	return ;
 }
 
+/*	Gets the RGB values of the floor and converts them to hexadecimal value
+	using ft_read_floor() and ft_rgb_to_hex() functions.	*/
 int	ft_floor_rgb(t_data *data, const char *str)
 {
 	int		i;
@@ -79,6 +83,8 @@ int	ft_floor_rgb(t_data *data, const char *str)
 	return (EXIT_SUCCESS);
 }
 
+/*	Gets the RGB values of the ceiling and converts them to hexadecimal value
+	using ft_read_floor() and ft_rgb_to_hex() functions.	*/
 int	ft_ceiling_rgb(t_data *data, const char *str)
 {
 	int		i;

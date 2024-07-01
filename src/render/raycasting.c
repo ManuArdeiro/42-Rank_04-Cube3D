@@ -6,20 +6,22 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:01:49 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/25 22:38:57 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 22:43:19 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-/*
-We initialize the set up for the rays
-- camera_x -> Where is the camera (-1 = left, 0 = center, 1 = right)
-- dir_x/y = direction of the ray
-- map_x/y = current square of the ray
-- deltadist_x/y = distance to go to the next x or y.
-*/
-
+/*	Initializes ray parameters based on the current column index:
+	* x -> Represents the current column index on the screen where raycasting
+		   calculations are performed. It determines the horizontal position of
+		   the ray as it scans across the screen from left to right.
+	* camera_x -> Where is the camera. From -1 for left to 1 for right (0 is
+				  center).		 
+	* dir_x/y -> the initial direction of the ray, adjusted by the player's
+				orientation.
+	* map_x/y -> current square of the ray.
+	* deltadist_x/y -> distance to go to the next x or y.	*/
 static void	ft_raycasting_info(int x, t_ray *ray, t_player *player)
 {
 	ft_ray_init(ray);
@@ -32,15 +34,16 @@ static void	ft_raycasting_info(int x, t_ray *ray, t_player *player)
 	ray->deltadist_y = fabs(1 / ray->dir_y);
 }
 
-/*
-- We are doing the initial set up for the dda
-- dda algorithm will jump one square in each loop eiter in a x or y direction
-- ray->sidedist_x or y = distance from the ray start position to the
-	next x or y position
-- if x or y < 0 go the next x or y to the left
-- if x or y > 0 go the next x or y to the right
-*/
-
+/*	Sets up the parameters for the Digital Differential Analyzer (DDA)
+	algorithm:
+	 -> ray->sidedist_? is the distance from the ray start position to the
+		next x or y position
+	So we do:
+	 -> Determines the step direction in x and y based on the ray's direction.
+	 -> Calculates the initial side distance (distance to the next x or y
+		boundary) for both directions.
+	These calculations prepare the ray for stepping through the grid cells
+	during the raycasting process.	*/
 static void	ft_set_dda(t_ray *ray, t_player *player)
 {
 	if (ray->dir_x < 0)
@@ -66,11 +69,22 @@ static void	ft_set_dda(t_ray *ray, t_player *player)
 }
 
 /*
-- We implement the DDA algorithm -> the loop will increment 1 square 
+- We implement the DDA algorithm -> the loop will increment 1 square
 -   until we hit a wall
 - If the sidedistx < sidedisty, x is the closest point from the ray
 */
 
+/*	Implements the Digital Differential Analyzer (DDA) algorithm to trace the
+	path of the ray:
+	 -> The loop continues incrementing by one grid square until it encounters
+	 	a wall using sidedist_x and sidedist_y.
+	 -> Updates ray->map_x and ray->map_y accordingly based on the step
+	 	direction (step_x and step_y).
+	 -> Sets ray->side to 0 for horizontal intersections and 1 for vertical
+	 	intersections.
+	Additional checks:
+	 -> Breaks the loop if the ray moves out of the map boundaries.
+	 -> Terminates the loop if a wall ('1') is hit in the map data.	*/
 static void	ft_run_dda(t_data *data, t_ray *ray)
 {
 	int	hit;
@@ -95,19 +109,31 @@ static void	ft_run_dda(t_data *data, t_ray *ray)
 			|| ray->map_y > data->map_height - 0.25
 			|| ray->map_x > data->map_width - 1.25)
 			break ;
-		else if (data->map[ray->map_y][ray->map_x] > '0')
+		else if (data->map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }
 
+/*	Calculates various parameters related to the ray's interaction with walls:
+	 -> Computes ray->wall_dist based on the distance to the nearest wall.
+	 -> Determines ray->line_height using the window height and ray->wall_dist
+	 -> Sets ray->draw_start and ray->draw_end to define the vertical extents
+		of the wall slice to be drawn.
+	 -> Adjusts ray->draw_start and ray->draw_end to ensure they do not exceed
+	 	the window boundaries.
+	 -> Computes ray->wall_x to determine the exact x-coordinate of the wall hit,
+	 	adjusting for fractional parts.
+	These calculations prepare the ray's properties for rendering the 3D
+	projection of walls onto the screen.
+*/
 static void	ft_line_length(t_ray *ray, t_data *data, t_player *player)
 {
 	if (ray->side == 0)
-		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
+		ray->wall_dist = ray->sidedist_x - ray->deltadist_x;
 	else
-		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
+		ray->wall_dist = ray->sidedist_y - ray->deltadist_y;
 	ray->line_height = (int)(data->window_height / ray->wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + data->window_height / 2;
+	ray->draw_start = -ray->line_height / 2 + data->window_height / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + data->window_height / 2;
@@ -120,6 +146,13 @@ static void	ft_line_length(t_ray *ray, t_data *data, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+/*	Raycasting will be calculated in 5 steps;
+	1. Initialize raycasting info for the current column.
+	2. Set up the Digital Differential Analyzer (DDA) for the ray.
+	3. Run the DDA to find the intersection point with a wall.
+	4. Calculate the line length and other relevant data.
+	5. Update the texture pixels for the current column based on the
+	ray. */
 int	ft_raycasting(t_player *player, t_data *data)
 {
 	t_ray	ray;
