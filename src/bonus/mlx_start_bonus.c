@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:06:18 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/01 17:56:07 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:33:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,21 @@ int	ft_mouse_motion(int x, int y, t_data *data)
 {	
 	if (x > data->window_width - MOUSE_WINDOW_LIMIT)
 	{
-		x = MOUSE_WINDOW_LIMIT;
+		x = data->window_width - MOUSE_WINDOW_LIMIT;
 		mlx_mouse_move(data->mlx, data->window, x, y);
 	}
 	else if (x < MOUSE_WINDOW_LIMIT)
 	{
-		x = data->window_width - MOUSE_WINDOW_LIMIT;
+		x = MOUSE_WINDOW_LIMIT;
 		mlx_mouse_move(data->mlx, data->window, x, y);
 	}
 	else if (x < data->mouse_old_x)
 	{
-		printf("x = %d data->player.pos_x = %f\n", x, data->player.pos_x);
 		data->player.rotate -= 1;
 		data->player.has_moved += ft_player_rotate(&data);
 	}
 	else if (x > data->mouse_old_x)
 	{
-		printf("x = %d data->player.pos_x = %f\n", x, data->player.pos_x);
 		data->player.rotate += 1;
 		data->player.has_moved += ft_player_rotate(&data);
 	}

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/02 12:39:12 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:57:02 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static int	ft_check_lines(t_data *data, const char *line, t_list **temp)
 		return (EXIT_FAILURE);
 	}
 	else if (ft_check_texture(data, line, "NO") == EXIT_FAILURE
-		|| ft_check_texture(data, line, "SO") == EXIT_FAILURE
-		|| ft_check_texture(data, line, "EA") == EXIT_FAILURE
-		|| ft_check_texture(data, line, "WE") == EXIT_FAILURE
-		|| ft_check_floor(data, line) == EXIT_FAILURE
-		|| ft_check_ceiling(data, line) == EXIT_FAILURE
-		|| ft_check_if_map(data,temp) == EXIT_FAILURE)
+		&& ft_check_texture(data, line, "SO") == EXIT_FAILURE
+		&& ft_check_texture(data, line, "EA") == EXIT_FAILURE
+		&& ft_check_texture(data, line, "WE") == EXIT_FAILURE
+		&& ft_check_floor(data, line) == EXIT_FAILURE
+		&& ft_check_ceiling(data, line) == EXIT_FAILURE
+		&& ft_check_if_map(data,temp) == EXIT_FAILURE)
 	{
 		perror("Error: Invalid line!!\n");
 		return (EXIT_FAILURE);
