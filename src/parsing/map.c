@@ -6,12 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:31:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/06/22 21:00:35 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:30:56 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*	Cheks the upper map line, if there are only 1s and 0s.	*/
 static void	ft_upper_map_line(t_data *data, const char *line,
 				const int start, const int end)
 {
@@ -34,6 +35,7 @@ static void	ft_upper_map_line(t_data *data, const char *line,
 	return ;
 }
 
+/*	Cheks the bottom map line, if there are only 1s and 0s.	*/
 static void	ft_bottom_map_line(t_data *data, const char *line,
 				const int start, const int end)
 {
@@ -58,6 +60,9 @@ static void	ft_bottom_map_line(t_data *data, const char *line,
 	return ;
 }
 
+/*	Processes a single line of the map and verifies its edges to be
+	sure the boundaries are closed. If so, the line is saved to the
+	map.	*/
 static void	ft_map_line(t_data *data, const char *line,
 				const int start, const int end)
 {
@@ -87,6 +92,8 @@ static void	ft_map_line(t_data *data, const char *line,
 	return ;
 }
 
+/*	Reads the complete map line by line and save it to the char **map
+	main structure. */
 static void	ft_read_map(t_data *data, t_list **temp, const int start,
 				const int end)
 {
@@ -113,6 +120,8 @@ static void	ft_read_map(t_data *data, t_list **temp, const int start,
 	return ;
 }
 
+/*	Checks the line to find the beginning of the map, it means if the
+	first non-space character is an 1.*/
 int	ft_check_if_map(t_data *data, t_list **temp)
 {
 	int		i;
