@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:03:07 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/01 19:01:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/04 01:09:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	ft_texture_img(t_data *data, t_img *image, char *path)
 	return ;
 }
 
-/*	Initializes the MLX library and creates a new window for rendering the
-	game.
+/*	Initializes the MLX library and creates a new window with the specified
+	width and height for rendering the game.
 	 -> ft_mlx_mouse() sets up mouse-related functionality if the BONUS_FLAG
 		is set.
 	Parameters:

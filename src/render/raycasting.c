@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:01:49 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/01 22:43:19 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:15:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 static void	ft_raycasting_info(int x, t_ray *ray, t_player *player)
 {
 	ft_ray_init(ray);
-	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+	ray->camera_x = (2 * x / (double)WINDOW_WIDTH) - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->map_x = (int)player->pos_x;
@@ -116,7 +116,11 @@ static void	ft_run_dda(t_data *data, t_ray *ray)
 
 /*	Calculates various parameters related to the ray's interaction with walls:
 	 -> Computes ray->wall_dist based on the distance to the nearest wall.
-	 -> Determines ray->line_height using the window height and ray->wall_dist
+	 -> Determines ray->line_height using the window height and ray->wall_dist,
+		line_height represents the height in pixels of the wall that will be
+		drawn on the screen for a specific column. This height depends on the
+		distance from the player's camera to the point where the ray intersects
+		the wall.
 	 -> Sets ray->draw_start and ray->draw_end to define the vertical extents
 		of the wall slice to be drawn.
 	 -> Adjusts ray->draw_start and ray->draw_end to ensure they do not exceed

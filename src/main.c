@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:53:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/07/01 12:02:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:33:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_check_args(const int argc, const char **argv)
 /*	The main() function:
 		->	Initializes the principal t_data structure.
 		->	Checks the arguments passed to the program.
-		->	Parses the .cub file.
+		->	Reads the .cub file and save data to main structure.
 		->	Prints the start menu.
 		->	Starts the game.	*/
 int	main(int argc, char **argv)

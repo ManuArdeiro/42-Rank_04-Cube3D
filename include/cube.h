@@ -6,15 +6,15 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 00:54:00 by Ardeiro           #+#    #+#             */
-/*   Updated: 2024/07/01 17:53:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/06 10:49:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef  CUBE_H
 # define  CUBE_H
 
-# ifndef BONUS
-#  define BONUS 1
+# ifndef BONUS_FLAG
+#  define BONUS_FLAG 1
 # endif
 
 //	INCLUDES:
@@ -56,6 +56,7 @@
 //	CONSTANTS:
 /////////////////////////////////////////////////////////////////////////////////
 
+# define TEST_FLAG				0
 # define PI 					3.14159265359
 # define WINDOW_WIDTH 			960
 # define WINDOW_HEIGHT 			720

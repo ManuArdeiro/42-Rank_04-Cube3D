@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 21:02:04 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/02 01:41:34 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:01:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 	 -> If data->texture.texture_pixels[y][x] > 0, sets the pixel color using
 		ft_image_pixel() with the corresponding texture color.
 	 -> If y < data->window_height / 2, sets the pixel color to ceiling color.
-	 -> If y >= data->window_height / 2, sets the pixel color to floor color. */
+	 -> If y >= data->window_height / 2, sets the pixel color to floor color.
+	Remember the origin (0, 0) is at the top-left corner of the screen. */
 static void	ft_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
 	if (data->texture.texture_pixels[y][x] > 0)
 		ft_image_pixel(image, x, y, data->texture.texture_pixels[y][x]);
 	else if (y < data->window_height / 2)
 		ft_image_pixel(image, x, y, data->texture.hex_ceiling);
-	else if (y < data->window_height -1)
+	else
 		ft_image_pixel(image, x, y, data->texture.hex_floor);
 }
 

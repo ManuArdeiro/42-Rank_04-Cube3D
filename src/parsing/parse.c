@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:40 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/07/02 14:57:02 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:40:15 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,13 @@ int	ft_empty_line(const char *line)
 }
 
 /* Main function for parsing; it calls to the functions in charge 
-	of read the .cub file, then the function to chesk the lines*/
+	of read the .cub file, then the function to chesk the lines. 
+	Parsing will save:
+	 -> Map width and height.
+	 -> RGB valus for floor and ceiling.
+	 -> Paths to textures (north, east, south and west, they have to
+	 	be different, they can not be repeated ones!).	
+	 -> Map (a char **map).	*/
 int ft_parsing(t_data *data, char *map_path)
 {
 	char	*line;
@@ -109,5 +115,7 @@ int ft_parsing(t_data *data, char *map_path)
 		else
 			break ;
 	}
+	if (TEST_FLAG == 1)
+		ft_print_info(data);
 	return (EXIT_SUCCESS);
 }
