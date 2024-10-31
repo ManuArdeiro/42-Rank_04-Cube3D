@@ -24,7 +24,7 @@ void	ft_print_menu_bonus(void)
 	printf("888        888  888 888  88b d8P  Y8b      'Y88b 888    888\n");
 	printf("888    888 888  888 888  888 88888888 888    888 888    888\n");
 	printf("Y88b  d88P Y88b 888 888 d88P Y8b.     Y88b  d88P 888  .d88P\n");
- 	printf(" 'Y8888P'   'Y88888 88888P'   'Y8888   'Y8888P'  8888888P' \n");
+	printf(" 'Y8888P'   'Y88888 88888P'   'Y8888   'Y8888P'  8888888P' \n");
 	printf("\n\n");
 	printf(GREEN "\tW" WHITE ": move forward\t");
 	printf(GREEN "\tS" WHITE ": move backward\n");

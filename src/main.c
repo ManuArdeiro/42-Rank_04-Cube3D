@@ -74,7 +74,7 @@ int	main(int argc, char **argv)
 	if (!data)
 	{
 		perror("Error: error allocating memory!!\n");
-		return ( free(data), EXIT_FAILURE);
+		return (free(data), EXIT_FAILURE);
 	}
 	ft_data_init(data);
 	if (ft_check_args(argc, (const char **)argv))

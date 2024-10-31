@@ -60,7 +60,7 @@ static int	ft_check_lines(t_data *data, const char *line, t_list **temp)
 		&& ft_check_texture(data, line, "WE") == EXIT_FAILURE
 		&& ft_check_floor(data, line) == EXIT_FAILURE
 		&& ft_check_ceiling(data, line) == EXIT_FAILURE
-		&& ft_check_if_map(data,temp) == EXIT_FAILURE)
+		&& ft_check_if_map(data, temp) == EXIT_FAILURE)
 	{
 		perror("Error: Invalid line!!\n");
 		return (EXIT_FAILURE);
@@ -90,16 +90,13 @@ int	ft_empty_line(const char *line)
 	 -> Paths to textures (north, east, south and west, they have to
 	 	be different, they can not be repeated ones!).	
 	 -> Map (a char **map).	*/
-int ft_parsing(t_data *data, char *map_path)
+int	ft_parsing(t_data *data, char *map_path)
 {
 	char	*line;
 	t_list	*temp;
 
 	if (ft_read_file(data, map_path))
-	{
-		perror("Error: File can't be readed!!\n");
-		return (EXIT_FAILURE);
-	}
+		ft_exit(data, "Error: File can't be readed!!\n");
 	temp = data->file;
 	line = (char *)temp->content;
 	while (temp->next)

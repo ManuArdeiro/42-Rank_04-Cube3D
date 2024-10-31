@@ -25,7 +25,7 @@
 	triggers a rotation to the right. The rotation is performed by the 
 	ft_player_rotate() function. */
 int	ft_mouse_motion(int x, int y, t_data *data)
-{	
+{
 	if (x > data->window_width - MOUSE_WINDOW_LIMIT)
 	{
 		x = data->window_width - MOUSE_WINDOW_LIMIT;
@@ -51,16 +51,19 @@ int	ft_mouse_motion(int x, int y, t_data *data)
 }
 
 /*	This function centers the mouse cursor in the game window.
-	It is typically called to reset the mouse position after processing mouse movement events,
-	ensuring the cursor remains at the center of the window. This technique is often used in
-	first-person games to allow for continuous mouse movement without the cursor leaving the window.
-	The function uses the `mlx_mouse_move` function provided by the MLX library to set the mouse position.
-	It calculates the center of the window using the window's width and height, then moves the mouse to this
-	central position. This helps in creating a seamless experience for rotating or looking around in the game
-	without the mouse cursor hitting the edges of the window. */
+	It is typically called to reset the mouse position after processing mouse
+	movement events, ensuring the cursor remains at the center of the window.
+	This technique is often used in 	first-person games to allow for
+	continuous mouse movement without the cursor leaving the window.
+	The function uses the `mlx_mouse_move` function provided by the MLX library
+	to set the mouse position. It calculates the center of the window using the
+	window's width and height, then moves the mouse to this central position.
+	This helps in creating a seamless experience for rotating or looking
+	around in the game without the mouse cursor hitting the edges of the
+	window.	*/
 void	ft_mlx_mouse(t_data *data)
 {
-	mlx_mouse_move(data->mlx, data->window, data->window_width / 2, 
+	mlx_mouse_move(data->mlx, data->window, data->window_width / 2,
 		data->window_height / 2);
 	return ;
 }

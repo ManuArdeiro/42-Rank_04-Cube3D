@@ -20,6 +20,7 @@ void	init_img_clean(t_img *img)
 	img->size_line = 0;
 	img->endian = 0;
 }
+
 static void	init_mapinfo(t_mapinfo *mapinfo)
 {
 	mapinfo->fd = 0;

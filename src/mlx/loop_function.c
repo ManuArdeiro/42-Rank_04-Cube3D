@@ -22,8 +22,8 @@
 	Returns: EXIT_SUCCESS when the loop completes.	*/
 int	ft_render_loop(t_data *data)
 {
-	int moved;
-	
+	int	moved;
+
 	moved = ft_player_move(data);
 	data->player.has_moved = data->player.has_moved + moved;
 	if (data->player.has_moved == 0)

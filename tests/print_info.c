@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_file.c                                        :+:      :+:    :+:   */
+/*   print_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,6 @@ void	ft_print_file(t_list *file)
 	{
 		printf("%s\n", (char *)temp->content);
 		temp = temp->next;
-
 	}
 	printf("%s\n", (char *)temp->content);
 	return ;
@@ -48,10 +47,7 @@ void	ft_print_info(t_data *data)
 	while (data->map[i][0])
 	{
 		while (data->map[i][j])
-		{
-			printf("%c", data->map[i][j]);
-			j++;
-		}
+			printf("%c", data->map[i][j++]);
 		printf("\n");
 		j = 0;
 		i++;

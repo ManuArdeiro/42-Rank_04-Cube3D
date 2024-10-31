@@ -80,5 +80,5 @@ void	ft_render_img(t_data *data)
 	ft_render_frame(data);
 	if (BONUS_FLAG)
 		ft_render_minimap(data);
-	return	;
+	return ;
 }

@@ -61,7 +61,8 @@ void	ft_mlx_start(t_data *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		ft_exit(data, "Error: mlx_init failed!!\n");
-	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cube");
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"Cube");
 	if (!data->window)
 		ft_exit(data, "Error: mlx_new_window failed!!\n");
 	if (BONUS_FLAG)

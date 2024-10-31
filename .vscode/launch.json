@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cube",
-			"args": ["${workspaceFolder}/maps/cheese_maze.cub"],
+			"args": ["${workspaceFolder}/maps/small_map.cub"],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

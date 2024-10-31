@@ -54,9 +54,9 @@ static bool	ft_valid_coordinate(int coord, int size)
  	 -> 'P' represents the player's position.
  	 -> '1' represents a wall.
  	 -> '0' represents an open space.
- -> '\0' represents an invalid coordinate or unrecognized character.
-Returns: a pointer to the created line (char *), or NULL if memory allocation fails.
-*/
+	 -> '\0' represents an invalid coordinate or unrecognized character.
+	Returns: a pointer to the created line (char *), or NULL if memory
+	allocation fails.	*/
 static char	*ft_add_line(t_data *data, t_minimap *mm, int y)
 {
 	char	*line;

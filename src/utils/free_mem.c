@@ -21,7 +21,7 @@ static void	ft_free_var(void *var)
 }
 
 /*	Frees all textures and and texture_pixels in the t_data structure.	*/
-static void ft_free_texture(t_data *data)
+static void	ft_free_texture(t_data *data)
 {
 	if (data->texture.texture[NORTH])
 		free(data->texture.texture[NORTH]);

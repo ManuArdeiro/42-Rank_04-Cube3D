@@ -39,7 +39,7 @@ MOVES           =   input_handler.c player_dir.c player_move.c player_pos.c \
                     player_rotate.c
 
 PARSING         =   checks.c colors_aux.c colors.c map.c parse.c rgb_to_hex.c \
-                    textures.c utils.c
+                    textures.c utils.c utils2.c
 
 RENDER          =   raycasting.c render.c texture.c
 

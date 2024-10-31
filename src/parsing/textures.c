@@ -82,16 +82,11 @@ int	ft_check_texture(t_data *data, const char *line, char *cardinal)
 		if (!path)
 			ft_exit(data, "Error: Malloc failed!!\n");
 		while (line[i] && !ft_is_space(line[i]))
-		{
-			path[j] = line[i];
-			i++;
-		j++;
-		}
+			path[j++] = line[i++];
 		path[j] = '\0';
 		ft_save_path(data, path, cardinal);
 		ft_check_path(data, path, cardinal[0]);
-		free(path);
-		return (EXIT_SUCCESS);
+		return (free(path), EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
 }

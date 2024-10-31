@@ -104,7 +104,6 @@ static void	ft_draw_minimap(t_minimap *minimap)
 	ft_minimap_border(minimap, MINIMAP_SPACE_COLOR);
 }
 
-
 /*	Function ft_render_minimap_img():
 	 -> Calculates the size of the minimap image based on the predefined 
 	 	minimap pixel size and the tile size.

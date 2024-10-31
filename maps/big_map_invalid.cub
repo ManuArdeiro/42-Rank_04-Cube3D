@@ -1,12 +1,12 @@
 R 1280 800
 
-EA assets/walls/stone_bricks/1.xpm
+EA assets/stone_bricks/1.xpm
 
-SO assets/walls/stone_bricks/2.xpm
+SO assets/stone_bricks/2.xpm
 
-NO assets/walls/stone_bricks/3.xpm
+NO assets/stone_bricks/3.xpm
 
-WE assets/walls/stone_bricks/4.xpm
+WE assets/stone_bricks/4.xpm
 
 S assets/sprites/barrel-w-shadow.xpm
 

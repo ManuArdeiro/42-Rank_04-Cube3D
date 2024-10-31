@@ -1,7 +1,7 @@
-NO assets/walls/wet_sponge.xpm
-SO assets/walls/wet_sponge.xpm
-WE assets/walls/wet_sponge.xpm
-EA assets/walls/wet_sponge.xpm
+NO assets/north.xpm
+SO assets/south.xpm
+WE assets/west.xpm
+EA assets/none.xpm
 
 F 164,169,20
 C 153,204,255
@@ -25,6 +25,6 @@ C 153,204,255
 101011111111111010101
 100010000000000010001
 101010111011111111101
-1S1000001000000000001
+1N1000001000000000001
 111111111111111111111
 

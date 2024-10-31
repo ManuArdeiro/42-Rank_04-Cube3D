@@ -78,12 +78,12 @@ static void	ft_texture_index(t_data *data, t_ray *ray)
     	 -> Calculates the texture's y-coordinate and updates the texture
 		 	position.The line:
 			texture->y = (int)texture->pos & (texture->size - 1);
-			ensures that the texture coordinate texture->y wraps around correctly,
-			enabling texture mapping using the efficient bitwise AND operation,
-			assuming the texture size is a POWER OF 2. This is a common technique
-			in graphics programming to optimize performance and ensure accurate
-			texture sampling. For instance, if texture->size is 64:
-			texture->size - 1 is 63, which in binary is 00111111.
+			ensures that the texture coordinate texture->y wraps around
+			correctly, enabling texture mapping using the efficient bitwise AND
+			operation, assuming the texture size is a POWER OF 2. This is a
+			common technique in graphics programming to optimize performance
+			and ensure accurate texture sampling. For instance, if texture->size
+			is 64: texture->size - 1 is 63, which in binary is 00111111.
 			Texture Wrapping: let's assume texture->pos is 130. Converting it to
 			an integer gives 130. Applying the bitwise AND operation with 63
 			(00111111) results in:
@@ -93,15 +93,16 @@ static void	ft_texture_index(t_data *data, t_ray *ray)
     	 -> Darkens the color if the texture index is NORTH or EAST.
 			color >> 1:
 			This shifts the binary value of the color to the right by 1 bit. It
-			means this operation divides the color value by 2, effectively reducing
-			its intensity.
+			means this operation divides the color value by 2, effectively
+			reducing its intensity.
 			& 8355711:
-			This is a bitwise mask applied to (color >> 1). The constant 8355711 in
-			binary is 100000000000000111111111, which means all bits are active
-			except for the 3 least significant bits. This bitwise AND operation
-			preserves only the 21 most significant bits of the color, which can
-			adjust the color for a shadow or transparency effect.
-    	 -> Updates the pixel in the texture_pixels array if the color is valid. */
+			This is a bitwise mask applied to (color >> 1). The constant 8355711
+			in binary is 100000000000000111111111, which means all bits are
+			active except for the 3 least significant bits. This bitwise AND
+			operation preserves only the 21 most significant bits of the color,
+			which can adjust the color for a shadow or transparency effect.
+    	 -> Updates the pixel in the texture_pixels array if the color is valid.
+		 */
 void	ft_texture_pixels_update(t_data *data, t_texture *texture,
 			t_ray *ray, int x)
 {
@@ -122,7 +123,7 @@ void	ft_texture_pixels_update(t_data *data, t_texture *texture,
 		texture->y = (int)texture->pos & (texture->size - 1);
 		texture->pos = texture->pos + texture->step;
 		color = data->texture.texture[texture->index]
-			[texture->size * texture->y + texture->x];
+		[texture->size * texture->y + texture->x];
 		if (texture->index == NORTH || texture->index == EAST)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
